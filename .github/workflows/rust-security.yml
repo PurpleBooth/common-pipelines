@@ -1,5 +1,10 @@
 on:
   workflow_call:
+    secrets:
+      token:
+        description: 'The github token'
+        required: true
+
 jobs:
   security-audit:
     runs-on: ubuntu-latest
@@ -15,4 +20,4 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/audit-check@v1.2.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.token }}
