@@ -4,6 +4,7 @@ on:
       ubuntu_install_deps:
         required: false
         type: string
+        default: "exit 1"
 jobs:
   security-audit:
     runs-on: ubuntu-latest
@@ -47,7 +48,7 @@ jobs:
           - os: windows-latest
     steps:
       - run: ${{ inputs.ubuntu_install_deps }}
-        if: matrix.os == 'ubuntu-latest' && inputs.ubuntu_install_deps
+        if: matrix.os == 'ubuntu-latest' && inputs.ubuntu_install_deps !== "exit 1"
         env:
           DEBIAN_FRONTEND: noninteractive
       - uses: actions/checkout@v2.3.4
