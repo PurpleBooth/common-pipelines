@@ -1,5 +1,9 @@
 on:
   workflow_call:
+    inputs:
+      ubuntu_install_deps:
+        required: false
+        type: string
 jobs:
   security-audit:
     runs-on: ubuntu-latest
@@ -16,3 +20,74 @@ jobs:
       - uses: actions-rs/audit-check@v1.2.0
         with:
           token: ${{ github.token }}
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1.0.7
+        with:
+          toolchain: stable
+          profile: default
+      - run: cargo check
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+          - os: ubuntu-latest
+          - os: windows-latest
+    steps:
+      - run: ${{ inputs.linux_install_deps }}
+        if: matrix.os == 'ubuntu-latest' && inputs.linux_install_deps
+        env:
+          DEBIAN_FRONTEND: noninteractive
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1.0.7
+        with:
+          toolchain: stable
+          profile: default
+      - run: cargo test
+  bench:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+          - os: ubuntu-latest
+          - os: windows-latest
+    steps:
+      - run: ${{ matrix.install }}
+        if: matrix.os == 'ubuntu-latest' && inputs.linux_install_deps
+        env:
+          DEBIAN_FRONTEND: noninteractive
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1.0.7
+        with:
+          toolchain: stable
+          profile: default
+      - run: cargo bench
