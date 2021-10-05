@@ -39,7 +39,10 @@ jobs:
           profile: default
       - run: cargo check
   test:
-    runs-on: [macos-latest, ubuntu-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - run: ${{ inputs.ubuntu_install_deps }}
         if: runner.os == 'Linux' && inputs.ubuntu_install_deps != 'exit 1'
@@ -60,7 +63,10 @@ jobs:
           profile: default
       - run: cargo test
   bench:
-    runs-on: [macos-latest, ubuntu-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - run: ${{ inputs.ubuntu_install_deps }}
         if: runner.os == 'Linux' && inputs.ubuntu_install_deps != 'exit 1'
@@ -82,7 +88,10 @@ jobs:
       - run: cargo bench
 
   lints:
-    runs-on: [ubuntu-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2.1.6
