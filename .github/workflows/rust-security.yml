@@ -1,0 +1,22 @@
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: true
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/audit-check@v1.2.0
+        with:
+          token: ${{ secrets.token }}
