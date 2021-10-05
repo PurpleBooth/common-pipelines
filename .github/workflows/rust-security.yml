@@ -1,7 +1,7 @@
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      token:
         required: true
 
 jobs:
@@ -19,4 +19,4 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/audit-check@v1.2.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
