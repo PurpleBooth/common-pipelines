@@ -46,8 +46,8 @@ jobs:
           - os: ubuntu-latest
           - os: windows-latest
     steps:
-      - run: ${{ inputs.linux_install_deps }}
-        if: matrix.os == 'ubuntu-latest' && inputs.linux_install_deps
+      - run: ${{ inputs.ubuntu_install_deps }}
+        if: matrix.os == 'ubuntu-latest' && inputs.ubuntu_install_deps
         env:
           DEBIAN_FRONTEND: noninteractive
       - uses: actions/checkout@v2.3.4
@@ -74,7 +74,7 @@ jobs:
           - os: windows-latest
     steps:
       - run: ${{ matrix.install }}
-        if: matrix.os == 'ubuntu-latest' && inputs.linux_install_deps
+        if: matrix.os == 'ubuntu-latest' && inputs.ubuntu_install_deps
         env:
           DEBIAN_FRONTEND: noninteractive
       - uses: actions/checkout@v2.3.4
