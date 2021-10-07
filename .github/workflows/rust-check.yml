@@ -1,26 +1,7 @@
 on:
   workflow_call:
-    inputs:
-      ubuntu_install_deps:
-        required: false
-        type: string
-        default: "exit 1"
+
 jobs:
-  security-audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/audit-check@v1.2.0
-        with:
-          token: ${{ github.token }}
   check:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +9,7 @@ jobs:
       - uses: actions/cache@v2.1.6
         with:
           path: |
+            .cache
             ~/.cargo/registry
             ~/.cargo/git
             ~/.cargo/bin
@@ -35,23 +17,25 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
         with:
+          profile: minimal
           toolchain: stable
-          profile: default
-      - run: cargo check
+          default: true
+      - uses: actions-rs/cargo@v1.0.3
+        with:
+          command: check
   test:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ "macos-latest", "ubuntu-latest", "windows-latest" ]
-    runs-on: ${{ matrix.os }}
+        include:
+          - os: macos-latest
+          - os: ubuntu-latest
     steps:
-      - run: ${{ inputs.ubuntu_install_deps }}
-        if: runner.os == 'Linux' && inputs.ubuntu_install_deps != 'exit 1'
-        env:
-          DEBIAN_FRONTEND: noninteractive
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2.1.6
         with:
           path: |
+            .cache
             ~/.cargo/registry
             ~/.cargo/git
             ~/.cargo/bin
@@ -59,55 +43,36 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
         with:
+          profile: minimal
           toolchain: stable
-          profile: default
-      - run: cargo test
-  bench:
-    strategy:
-      matrix:
-        os: [ "macos-latest", "ubuntu-latest", "windows-latest" ]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - run: ${{ inputs.ubuntu_install_deps }}
-        if: runner.os == 'Linux' && inputs.ubuntu_install_deps != 'exit 1'
-        env:
-          DEBIAN_FRONTEND: noninteractive
-      - uses: actions/checkout@v2.3.4
-      - uses: actions/cache@v2.1.6
+          default: true
+      - uses: actions-rs/cargo@v1.0.3
         with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1.0.7
-        with:
-          toolchain: stable
-          profile: default
-      - run: cargo bench
-
+          command: test
   lints:
-    strategy:
-      matrix:
-        os: [ "ubuntu-latest", "windows-latest" ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2.1.6
         with:
           path: |
+            .cache
             ~/.cargo/registry
             ~/.cargo/git
             ~/.cargo/bin
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v1.0.7
         with:
+          profile: minimal
           toolchain: nightly
-          profile: default
           default: true
           components: rustfmt, clippy
-      - run: cargo fmt --all -- --check
-      - run: cargo clippy --all-targets --all-features -- -D warnings -D "clippy::all" -D "clippy::pedantic" -D "clippy::cargo"
-
+      - uses: actions-rs/cargo@v1.0.3
+        with:
+          command: fmt
+          args: --all -- --check
+      - uses: actions-rs/cargo@v1.0.3
+        with:
+          command: clippy
+          args: --all-targets --all-features -- -D warnings -Dclippy::all -D clippy::pedantic -D clippy::cargo
