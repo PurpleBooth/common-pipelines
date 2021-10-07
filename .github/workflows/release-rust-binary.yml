@@ -182,6 +182,13 @@ jobs:
           GIT_REPO: ${{ github.repository }}
           GIT_TAG: v${{ inputs.current_version }}
         name: Calculate the binary hash
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v1
+        with:
+          config: main-repo/cliff.toml
+          args: --verbose --latest --repository main-repo
+        env:
+          OUTPUT: CHANGELOG.md
       - uses: cuchi/jinja2-action@v1.2.0
         with:
           template: main-repo/homebrew/formula.rb.j2
@@ -200,7 +207,7 @@ jobs:
           git -C homebrew-repo add "Formula/$REPOSITORY_NAME.rb"
           git -C homebrew-repo commit -m "fix: Update $REPOSITORY_NAME to $VERSION"
           git -C homebrew-repo push origin "$REPOSITORY_NAME-$VERSION"
-          (cd homebrew-repo && gh pr create --label releases --base main --fill)
+          (cd homebrew-repo && gh pr create --body-file "../CHANGELOG.md" --label releases --base main --fill)
         env:
           REPOSITORY_NAME: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}
           GIT_TAG: v${{ inputs.current_version }}
