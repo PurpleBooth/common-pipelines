@@ -8,7 +8,6 @@ on:
     secrets:
       cargo_token:
         description: 'CARGO_TOKEN to use'
-        type: string
         required: true
 
 
