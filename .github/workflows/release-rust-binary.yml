@@ -6,7 +6,7 @@ on:
         type: string
         required: true
       run_on_windows:
-        description: 'Enable checks on windows'
+        description: 'Enable buiding windows binary'
         default: true
         required: false
         type: boolean
