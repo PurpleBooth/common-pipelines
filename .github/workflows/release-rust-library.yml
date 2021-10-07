@@ -2,7 +2,7 @@ on:
   workflow_call:
     inputs:
       current_version:
-        description: 'THe current version'
+        description: 'The current version'
         type: string
         required: true
     secrets:
