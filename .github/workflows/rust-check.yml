@@ -1,6 +1,11 @@
 on:
   workflow_call:
-
+    inputs:
+      run_on_windows:
+        description: 'Enable checks on windows'
+        default: true
+        required: false
+        type: boolean
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -25,6 +30,7 @@ jobs:
           command: check
   test:
     runs-on: ${{ matrix.os }}
+    if: matrix.os != "windows-latest" || ( matrix.os == "windows-latest" && inputs.run_on_windows )
     strategy:
       matrix:
         include:
@@ -51,6 +57,7 @@ jobs:
         with:
           command: test
   lints:
+    if: matrix.os != "windows-latest" || ( matrix.os == "windows-latest" && inputs.run_on_windows )
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
