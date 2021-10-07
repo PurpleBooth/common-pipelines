@@ -83,3 +83,22 @@ jobs:
         with:
           command: clippy
           args: --all-targets --all-features -- -D warnings -Dclippy::all -D clippy::pedantic -D clippy::cargo
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+        name: Checkout the repository
+      - uses: actions/cache@v2.1.6
+        name: Cache cargo
+        with:
+          path: |
+            .cache
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/audit-check@v1.2.0
+        name: Audit check cargo packages
+        with:
+          token: ${{ github.token }}
