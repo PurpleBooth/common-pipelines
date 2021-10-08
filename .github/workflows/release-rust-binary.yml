@@ -20,7 +20,9 @@ on:
       gpg_passphrase:
         description: 'The passphrase for the gpg key'
         required: true
-
+      cargo_token:
+        description: 'Token to publish to crates.io'
+        required: false
 
 jobs:
 
@@ -213,3 +215,18 @@ jobs:
           GIT_TAG: v${{ inputs.current_version }}
           GITHUB_TOKEN: ${{ secrets.committer_token }}
 
+  cargo-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+        if: secrets.cargo_token
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+      - name: Generate release
+        if: secrets.cargo_token
+        run: |
+          cargo login "$CARGO_TOKEN"
+          cargo publish
+        env:
+          CARGO_TOKEN: ${{ secrets.cargo_token }}
