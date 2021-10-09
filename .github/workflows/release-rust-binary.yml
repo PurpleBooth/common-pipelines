@@ -219,14 +219,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-        if: secrets.cargo_token
         name: Checkout the repository
         with:
           ref: v${{ inputs.current_version }}
       - name: Generate release
-        if: secrets.cargo_token
         run: |
-          cargo login "$CARGO_TOKEN"
-          cargo publish
+          if [ -n "$CARGO_TOKEN" ] ; then
+            cargo login "$CARGO_TOKEN"
+            cargo publish
+          fi
         env:
           CARGO_TOKEN: ${{ secrets.cargo_token }}
