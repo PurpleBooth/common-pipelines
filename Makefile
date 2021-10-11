@@ -1,0 +1,2 @@
+specdown:
+	specdown --version
