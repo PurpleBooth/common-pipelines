@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: echo $VAR_A
-      env:
-        VAR_A: ${{ github.head_ref || github.ref }}
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+      - run: echo $VAR_A
+        env:
+          VAR_A: ${{ github.head_ref || github.ref }}
