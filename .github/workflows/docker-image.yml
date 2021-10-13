@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+  pull_request_target:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo $VAR_A
+      env:
+        VAR_A: ${{ github.head_ref || github.ref }}
