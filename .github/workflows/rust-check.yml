@@ -14,6 +14,19 @@ on:
         default: true
         required: false
         type: boolean
+      windows_before_script:
+        default: ""
+        required: false
+        type: string
+      ubuntu_before_script:
+        default: ""
+        required: false
+        type: string
+      mac_before_script:
+        default: ""
+        required: false
+        type: string
+
 
 jobs:
   check:
@@ -44,9 +57,14 @@ jobs:
       matrix:
         include:
           - os: macos-latest
+            pre_script: ${{ inputs.mac_before_script }}
           - os: ubuntu-latest
+            pre_script: ${{ inputs.ubuntu_before_script }}
           - os: windows-latest
+            pre_script: ${{ inputs.windows_before_script }}
     steps:
+      - run: ${{ matrix.pre_script }}
+        if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ""
       - uses: actions/checkout@v2.3.5
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       - uses: actions/cache@v2
