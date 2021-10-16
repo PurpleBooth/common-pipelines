@@ -14,9 +14,6 @@ queue_rules:
       - base=main
       - author~=^dependabot(|-preview)\[bot\]$
 
-
-
-
 pull_request_rules:
   - name: request review on external contributor
     conditions:
