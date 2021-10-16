@@ -19,15 +19,20 @@ jobs:
       uses: docker/setup-qemu-action@v1.2.0
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1.6.0
+    - run: echo ::set-output "name=repository::$( echo "ghcr.io/$REPOSITORY" | tr '[:upper:]' '[:lower:]')"
+      id: docker
+      env:
+        REPOSITORY: ${{ github.repository }}
     - name: Test build
       uses: docker/build-push-action@v2.7.0
       with:
         context: .
         push: true
         pull: true
+        cache-to: type=registry,ref=${{ steps.docker.outputs.repository }}:cache,mode=max
         cache-from: |
-          type=registry,ref=${{ github.repository }}:latest
-          type=registry,ref=${{ github.repository }}:cache
+          type=registry,ref=${{ steps.docker.outputs.repository }}:latest
+          type=registry,ref=${{ steps.docker.outputs.repository }}:cache
         tags: |-
-          ${{ github.repository }}:git-${{ github.sha }}
-          ${{ github.repository }}:latest
+          ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
+          ${{ steps.docker.outputs.repository }}:latest
