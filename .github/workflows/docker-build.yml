@@ -28,9 +28,13 @@ jobs:
         context: .
         push: false
         pull: true
+        load: true
         cache-from: |
           type=registry,ref=${{ steps.docker.outputs.repository }}:latest
           type=registry,ref=${{ steps.docker.outputs.repository }}:cache
         tags: |-
           ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
           ${{ steps.docker.outputs.repository }}:latest
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
