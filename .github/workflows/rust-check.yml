@@ -15,10 +15,6 @@ on:
         required: false
         type: boolean
 
-concurrency:
-  group: rust-check-${{ github.head_ref }}
-  cancel-in-progress: true
-
 jobs:
   check:
     runs-on: ubuntu-latest
