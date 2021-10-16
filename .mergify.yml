@@ -4,7 +4,6 @@ queue_rules:
     batch_size: 20
     conditions:
       - base=main
-      - author~=^dependabot(|-preview)\[bot\]$
 
 pull_request_rules:
   - name: request review on external contributor
@@ -18,7 +17,9 @@ pull_request_rules:
   - name: automatic rebase for dependencies
     conditions:
       - base=main
-      - author~=^dependabot(|-preview)\[bot\]$
+      - or:
+        - author~=^dependabot(|-preview)\[bot\]$
+        - author=PurpleBooth
     actions:
       queue:
         method: rebase
