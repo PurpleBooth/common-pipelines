@@ -27,15 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v2
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           path: |
             .cache
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - run: |
           set -euo pipefail

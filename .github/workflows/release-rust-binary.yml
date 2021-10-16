@@ -39,17 +39,17 @@ jobs:
         name: Checkout the repository
         with:
           ref: v${{ inputs.current_version }}
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v2
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        name: Cache cargo dependencies
         with:
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           path: |
             .cache
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         name: Install rust toolchain
@@ -105,16 +105,16 @@ jobs:
         with:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
-      - uses: actions/cache@v2.1.6
-        name: Cache cargo dependencies
+      - uses: actions/cache@v2
         with:
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           path: |
             .cache
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions/download-artifact@v2
         name: Retrieve assets
       - name: Generate a changelog
