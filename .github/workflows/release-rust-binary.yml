@@ -5,6 +5,10 @@ on:
         description: 'The current version'
         type: string
         required: true
+      previous_version:
+        description: 'The previous version'
+        type: string
+        required: true
       run_on_windows:
         description: 'Enable buiding windows binary'
         default: true
@@ -119,7 +123,7 @@ jobs:
         name: Retrieve assets
       - uses: PurpleBooth/changelog-action@v0.1.0
         with:
-          args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
+          args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         id: create_release
@@ -184,7 +188,7 @@ jobs:
       - uses: PurpleBooth/changelog-action@v0.1.0
         with:
           config: main-repo/cliff.toml
-          args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
+          args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - uses: cuchi/jinja2-action@v1.2.0
         with:
           template: main-repo/homebrew/formula.rb.j2
