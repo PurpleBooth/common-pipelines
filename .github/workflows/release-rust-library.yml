@@ -5,6 +5,10 @@ on:
         description: 'The current version'
         type: string
         required: true
+      previous_version:
+        description: 'The previous version'
+        type: string
+        required: true
     secrets:
       cargo_token:
         description: 'CARGO_TOKEN to use'
@@ -38,13 +42,9 @@ jobs:
         with:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
-      - name: Generate a changelog
-        uses: orhun/git-cliff-action@v1
+      - uses: PurpleBooth/changelog-action@v0.1.0
         with:
-          config: cliff.toml
-          args: --verbose --latest
-        env:
-          OUTPUT: CHANGELOG.md
+          args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         id: create_release
