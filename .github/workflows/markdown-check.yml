@@ -6,6 +6,10 @@ on:
   workflow_dispatch:
   workflow_call:
 
+concurrency:
+  group: markdown-check-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   lint-markdown:
     runs-on: ubuntu-latest

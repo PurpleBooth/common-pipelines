@@ -12,6 +12,10 @@ on:
         required: false
         type: boolean
 
+concurrency:
+  group: specdown-check-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   specdown:
     runs-on: ${{ matrix.os }}
