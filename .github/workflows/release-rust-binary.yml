@@ -188,7 +188,7 @@ jobs:
       - uses: PurpleBooth/changelog-action@v0.1.0
         with:
           config: main-repo/cliff.toml
-          args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
+          args: -v --repository main-repo v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - uses: cuchi/jinja2-action@v1.2.0
         with:
           template: main-repo/homebrew/formula.rb.j2
