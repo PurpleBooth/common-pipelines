@@ -3,19 +3,8 @@ queue_rules:
     speculative_checks: 20
     batch_size: 20
     conditions:
-      - check-success~=^lints
-      - check-success~=^test
-      - check-success~=^security-audit
-      - check-success~=^specdown
-      - check-success~=^check
-      - check-success~=^docker-build
-      - check-success~=^version
-      - check-success~=^lint-markdown
       - base=main
       - author~=^dependabot(|-preview)\[bot\]$
-
-
-
 
 pull_request_rules:
   - name: request review on external contributor
@@ -28,14 +17,6 @@ pull_request_rules:
 
   - name: automatic rebase for dependencies
     conditions:
-      - check-success~=^lints
-      - check-success~=^test
-      - check-success~=^security-audit
-      - check-success~=^specdown
-      - check-success~=^check
-      - check-success~=^docker-build
-      - check-success~=^version
-      - check-success~=^lint-markdown
       - base=main
       - author~=^dependabot(|-preview)\[bot\]$
     actions:
