@@ -117,13 +117,9 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions/download-artifact@v2
         name: Retrieve assets
-      - name: Generate a changelog
-        uses: orhun/git-cliff-action@v1
+      - uses: PurpleBooth/changelog-action@v0.1.0
         with:
-          config: cliff.toml
-          args: --verbose --latest
-        env:
-          OUTPUT: CHANGELOG.md
+          args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         id: create_release
@@ -185,13 +181,10 @@ jobs:
           GIT_REPO: ${{ github.repository }}
           GIT_TAG: v${{ inputs.current_version }}
         name: Calculate the binary hash
-      - name: Generate a changelog
-        uses: orhun/git-cliff-action@v1
+      - uses: PurpleBooth/changelog-action@v0.1.0
         with:
           config: main-repo/cliff.toml
-          args: --verbose --latest --repository main-repo
-        env:
-          OUTPUT: CHANGELOG.md
+          args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
       - uses: cuchi/jinja2-action@v1.2.0
         with:
           template: main-repo/homebrew/formula.rb.j2
