@@ -35,6 +35,3 @@ jobs:
         tags: |-
           ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
           ${{ steps.docker.outputs.repository }}:latest
-    - uses: Azure/container-scan@v0
-      with:
-        image-name: ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
