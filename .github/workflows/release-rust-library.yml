@@ -42,7 +42,7 @@ jobs:
         with:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
-      - uses: PurpleBooth/changelog-action@v0.1.0
+      - uses: PurpleBooth/changelog-action@v0.1.1
         with:
           args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - env:
