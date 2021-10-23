@@ -33,7 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.5
+        name: Checkout the repository
       - uses: actions/cache@v2
+        name: Setup the cache
         with:
           path: |
             .cache
@@ -44,11 +46,13 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
+        name: Setup the stable rust toolchain
         with:
           profile: minimal
           toolchain: stable
           default: true
       - uses: actions-rs/cargo@v1.0.3
+        name: Check package and all of its dependencies for errors
         with:
           command: check
   test:
@@ -64,10 +68,13 @@ jobs:
             pre_script: ${{ inputs.windows_before_script }}
     steps:
       - run: ${{ matrix.pre_script }}
+        name: Install dependencies
         if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
       - uses: actions/checkout@v2.3.5
+        name: Checkout the repository
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       - uses: actions/cache@v2
+        name: Setup the cache
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           path: |
@@ -79,12 +86,14 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
+        name: Setup the stable rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           profile: minimal
           toolchain: stable
           default: true
       - uses: actions-rs/cargo@v1.0.3
+        name: Execute all unit and integration tests and build examples
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: test
@@ -98,8 +107,10 @@ jobs:
           - os: windows-latest
     steps:
       - uses: actions/checkout@v2.3.5
+        name: Checkout the repository
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       - uses: actions/cache@v2
+        name: Setup the cache
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           path: |
@@ -111,6 +122,7 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
+        name: Setup the nightly rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           profile: minimal
@@ -118,11 +130,13 @@ jobs:
           default: true
           components: rustfmt, clippy
       - uses: actions-rs/cargo@v1.0.3
+        name: Check the formatting of the code
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: fmt
           args: --all -- --check
       - uses: actions-rs/cargo@v1.0.3
+        name: Lint the code with clippy
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: clippy
@@ -133,6 +147,7 @@ jobs:
       - uses: actions/checkout@v2.3.5
         name: Checkout the repository
       - uses: actions/cache@v2
+        name: Setup the cache
         with:
           path: |
             .cache
@@ -159,10 +174,13 @@ jobs:
             pre_script: ${{ inputs.windows_before_script }}
     steps:
       - run: ${{ matrix.pre_script }}
+        name: Install dependencies
         if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
       - uses: actions/checkout@v2.3.5
+        name: Checkout the repository
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       - uses: actions/cache@v2
+        name: Setup the cache
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           path: |
@@ -174,12 +192,14 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
+        name: Setup the stable rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           profile: minimal
           toolchain: stable
           default: true
       - uses: actions-rs/cargo@v1.0.3
+        name: Execute all benchmarks
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: bench
