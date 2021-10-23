@@ -27,6 +27,7 @@ jobs:
         password: ${{ github.token }}
     - run: echo ::set-output "name=repository::$( echo "ghcr.io/$REPOSITORY" | tr '[:upper:]' '[:lower:]')"
       id: docker
+      name: Turn repository name into docker registry name
       env:
         REPOSITORY: ${{ github.repository }}
     - name: Test build
