@@ -25,11 +25,13 @@ jobs:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
       - uses: actions-rs/toolchain@v1.0.7
+        name: Install rust stable
         with:
           toolchain: stable
           profile: default
       - env:
           CARGO_TOKEN: ${{ secrets.cargo_token }}
+        name: Publish to cargo
         run: |
           cargo login "$CARGO_TOKEN"
           cargo publish
@@ -43,11 +45,13 @@ jobs:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
       - uses: PurpleBooth/changelog-action@v0.1.1
+        name: Generate the changelog
         with:
           args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         id: create_release
+        name: Create gitub release
         uses: ncipollo/release-action@v1.8.10
         with:
           allowUpdates: true
