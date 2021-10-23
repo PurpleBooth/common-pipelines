@@ -45,6 +45,7 @@ jobs:
           ref: v${{ inputs.current_version }}
       - uses: actions/cache@v2
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        name: Setup Cache
         with:
           path: |
             .cache
@@ -110,6 +111,7 @@ jobs:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
       - uses: actions/cache@v2
+        name: Setup Cache
         with:
           path: |
             .cache
@@ -122,11 +124,13 @@ jobs:
       - uses: actions/download-artifact@v2
         name: Retrieve assets
       - uses: PurpleBooth/changelog-action@v0.1.1
+        name: Generate changelog
         with:
           args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         id: create_release
+        name: Create github release
         uses: ncipollo/release-action@v1.8.10
         with:
           allowUpdates: true
@@ -141,6 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: PurpleBooth/generate-formula-action@v0.1.0
+        name: Create PR for formula
         with:
           current_version: ${{ inputs.current_version }}
           previous_version: ${{ inputs.previous_version }}
