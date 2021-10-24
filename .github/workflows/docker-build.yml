@@ -7,8 +7,8 @@ on:
   workflow_call:
     inputs:
       platforms:
-        description: Build for a given platform
         type: string
+        description: "List of target platforms for build"
         required: false
 jobs:
   docker-build:
