@@ -5,6 +5,10 @@ on:
         description: The current version
         type: string
         required: true
+      platforms:
+        type: string
+        description: "List of target platforms for build"
+        required: false
 jobs:
   docker-push:
     runs-on: ubuntu-latest
@@ -36,6 +40,7 @@ jobs:
         context: .
         push: true
         pull: true
+        platforms: ${{ inputs.platforms }}
         cache-to: type=registry,ref=${{ steps.docker.outputs.repository }}:cache,mode=max
         cache-from: |
           type=registry,ref=${{ steps.docker.outputs.repository }}:latest
