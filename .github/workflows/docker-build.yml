@@ -34,6 +34,7 @@ jobs:
         pull: true
         platforms: ${{ inputs.platforms }}
         cache-from: |
+          type=registry,ref=$${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
           type=registry,ref=${{ steps.docker.outputs.repository }}:latest
           type=registry,ref=${{ steps.docker.outputs.repository }}:cache
         tags: |-
