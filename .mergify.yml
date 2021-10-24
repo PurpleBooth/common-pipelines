@@ -3,6 +3,8 @@ queue_rules:
     speculative_checks: 20
     batch_size: 20
     conditions:
+      - "#check-pending=0"
+      - "#check-success>=2"
       - base=main
 
 pull_request_rules:
@@ -16,6 +18,8 @@ pull_request_rules:
 
   - name: automatic rebase for dependencies
     conditions:
+      - "#check-pending=0"
+      - "#check-success>=2"
       - base=main
       - or:
         - author~=^dependabot(|-preview)\[bot\]$
