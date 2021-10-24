@@ -32,7 +32,6 @@ jobs:
         context: .
         push: false
         pull: true
-        load: true
         platforms: ${{ inputs.platforms }}
         cache-from: |
           type=registry,ref=${{ steps.docker.outputs.repository }}:latest
