@@ -50,4 +50,4 @@ jobs:
         tags: |-
           ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
           ${{ steps.docker.outputs.repository }}:latest
-          type=registry,ref=${{ steps.docker.outputs.repository }}:v${{ inputs.current_version }}
+          ${{ steps.docker.outputs.repository }}:v${{ inputs.current_version }}
