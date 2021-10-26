@@ -58,17 +58,7 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - run: |
-          set -euo pipefail
-          mkdir -p "$GITHUB_WORKSPACE/target/assorted/bin"
-          curl -Lo "$GITHUB_WORKSPACE/target/assorted/bin/specdown" "$SPECDOWN_URL"
-          chmod +x "$GITHUB_WORKSPACE/target/assorted/bin/specdown"
-          echo "$GITHUB_WORKSPACE/target/assorted/bin" >> "$GITHUB_PATH"
-        env:
-          SPECDOWN_URL: ${{ matrix.specdown }}
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        shell: bash
-        name: Download Specdown
+      - uses: specdown/setup-specdown-action@v0.1.1
       - uses: actions-rs/toolchain@v1.0.7
         name: Setup the stable rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
