@@ -31,13 +31,10 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            specdown: https://github.com/specdown/specdown/releases/latest/download/specdown-x86_64-apple-darwin
             pre_script: ${{ inputs.mac_before_script }}
           - os: ubuntu-latest
-            specdown: https://github.com/specdown/specdown/releases/latest/download/specdown-x86_64-unknown-linux-gnu
             pre_script: ${{ inputs.ubuntu_before_script }}
           - os: windows-latest
-            specdown: https://github.com/specdown/specdown/releases/latest/download/specdown-x86_64-pc-windows-msvc.exe
             pre_script: ${{ inputs.windows_before_script }}
     steps:
       - run: ${{ matrix.pre_script }}
@@ -59,6 +56,8 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: specdown/setup-specdown-action@v0.1.1
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        name: Download Specdown
       - uses: actions-rs/toolchain@v1.0.7
         name: Setup the stable rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
