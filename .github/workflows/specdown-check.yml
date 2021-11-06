@@ -72,6 +72,8 @@ jobs:
           icacls C:\Windows\System32\bash.exe /grant administrators:F
           ren C:\Windows\System32\bash.exe wsl-bash.exe
       - uses: extractions/setup-just@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           if [ -f "Makefile" ]; then
             make specdown
