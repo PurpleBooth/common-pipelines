@@ -71,6 +71,13 @@ jobs:
           takeown /F C:\Windows\System32\bash.exe
           icacls C:\Windows\System32\bash.exe /grant administrators:F
           ren C:\Windows\System32\bash.exe wsl-bash.exe
-      - run: make specdown
+      - uses: extractions/setup-just@v1
+      - run: |
+          if [ -f "Makefile" ]; then
+            make specdown
+          else
+            just specdown
+          fi
+        shell: bash
         name: Run specdown
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
