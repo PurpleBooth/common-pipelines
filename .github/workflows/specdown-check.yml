@@ -55,7 +55,7 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: specdown/setup-specdown-action@v0.2.4
+      - uses: specdown/setup-specdown-action@v0.2.5
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         name: Download Specdown
       - uses: actions-rs/toolchain@v1.0.7
