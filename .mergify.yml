@@ -3,8 +3,23 @@ queue_rules:
     speculative_checks: 20
     batch_size: 20
     conditions:
-      - "#check-pending=0"
-      - "#check-success>=2"
+      - check-success=lint-markdown
+      - check-success=specdown (macos-latest)
+      - check-success=specdown (ubuntu-latest)
+      - check-success=specdown (windows-latest) 
+      - check-success=docker-build
+      - check-success=version
+      - check-success=check
+      - check-success=test (macos-latest)
+      - check-success=test (ubuntu-latest)
+      - check-success=test (windows-latest)
+      - check-success=lints (macos-latest)
+      - check-success=lints (ubuntu-latest)
+      - check-success=lints (windows-latest)
+      - check-success=security-audit
+      - check-success=bench (macos-latest)
+      - check-success=bench (ubuntu-latest)
+      - check-success=bench (windows-latest) 
       - base=main
 
 pull_request_rules:
@@ -18,8 +33,23 @@ pull_request_rules:
 
   - name: automatic rebase for dependencies
     conditions:
-      - "#check-pending=0"
-      - "#check-success>=2"
+      - check-success=lint-markdown
+      - check-success=specdown (macos-latest)
+      - check-success=specdown (ubuntu-latest)
+      - check-success=specdown (windows-latest) 
+      - check-success=docker-build
+      - check-success=version
+      - check-success=check
+      - check-success=test (macos-latest)
+      - check-success=test (ubuntu-latest)
+      - check-success=test (windows-latest)
+      - check-success=lints (macos-latest)
+      - check-success=lints (ubuntu-latest)
+      - check-success=lints (windows-latest)
+      - check-success=security-audit
+      - check-success=bench (macos-latest)
+      - check-success=bench (ubuntu-latest)
+      - check-success=bench (windows-latest) 
       - base=main
       - or:
         - author~=^dependabot(|-preview)\[bot\]$
