@@ -140,7 +140,7 @@ jobs:
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: clippy
-          args: --all-targets --all-features -- -D warnings -Dclippy::all -D clippy::pedantic -D clippy::cargo
+          args: --all-targets --all-features -- -D warnings -D clippy::all -D clippy::pedantic -D clippy::cargo -A clippy::multiple-crate-versions
   security-audit:
     runs-on: ubuntu-latest
     steps:
