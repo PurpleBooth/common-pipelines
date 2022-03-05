@@ -149,8 +149,9 @@ jobs:
         profile: minimal
         toolchain: nightly
         default: true
-    - run: rm Cargo.lock
+    - run: rm Cargo.lock || true
       shell: bash
+      name: Remove any existing dependency calculations
     - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
