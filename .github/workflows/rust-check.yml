@@ -134,11 +134,11 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1.0.7
-        name: Setup the stable rust toolchain
+        name: Setup the nightly rust toolchain
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: nightly
           default: true
       - uses: actions-rs/cargo@v1.0.3
         name: Execute all unit and integration tests and build examples
@@ -229,7 +229,6 @@ jobs:
           profile: minimal
           toolchain: nightly
           default: true
-          components: rustfmt, clippy
       - uses: actions-rs/cargo@v1.0.3
         name: Execute all unit and integration tests and build examples
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
@@ -291,6 +290,14 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1.0.7
+        name: Setup the nightly rust toolchain
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        with:
+          profile: minimal
+          toolchain: nightly
+          default: true
+          components: rustfmt, clippy
       - uses: actions-rs/cargo@v1.0.3
         name: Execute all unit and integration tests and build examples
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
