@@ -141,21 +141,6 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Install TOML Parser on Linux or Mac
-      if: runner.os != 'Windows'
-      run: brew install dasel
-    - name: Install TOML Parser on Windows
-      shell: bash
-      if: runner.os == 'Windows' && inputs.run_on_windows == true
-      run: |
-        set -euo pipefail
-
-        mkdir -p "$HOME/.local/bin"
-        URL="$(curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | jq -r '.assets[].browser_download_url | select( . | contains("dasel_windows_amd64.exe"))')"
-        curl -Lo dasel_windows_amd64.exe "$URL"
-        mv dasel_windows_amd64.exe "$HOME/.local/bin/dasel.exe"
-        chmod +x "$HOME/.local/bin/dasel.exe"
-        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
     - uses: actions-rs/toolchain@v1.0.7
       name: Setup the nightly rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
@@ -164,24 +149,15 @@ jobs:
         profile: minimal
         toolchain: nightly
         default: true
-    - run: cat Cargo.toml | dasel -m -r toml .dependencies.- | xargs  -I {}  cargo
-        update -Z minimal-versions -p "{}"
-      name: Downgrade dependencies to lowest possible version
+    - run: rm Cargo.lock
       shell: bash
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-    - uses: actions-rs/cargo@v1.0.3
-      name: Show which versions of dependencies were selected for debugging purposes
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      with:
-        command: tree
     - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       with:
-        command: test
+        command: build
+        args: -Z minimal-versions
 
   lints:
     runs-on: ${{ matrix.os }}
