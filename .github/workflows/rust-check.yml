@@ -196,57 +196,7 @@ jobs:
         with:
           command: clippy
           args: --all-targets --all-features -- -D warnings -D clippy::all -D clippy::pedantic -D clippy::cargo -A clippy::multiple-crate-versions
-          
-  lints-minimal:
-    if: inputs.run_minimal_version_check == true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: macos-latest
-          - os: ubuntu-latest
-          - os: windows-latest
-    steps:
-      - uses: actions/checkout@v2.4.0
-        name: Checkout the repository
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      - uses: actions/cache@v2
-        name: Setup the cache
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          path: |
-            .cache
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1.0.7
-        name: Setup the nightly rust toolchain
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          profile: minimal
-          toolchain: nightly
-          default: true
-      - uses: actions-rs/cargo@v1.0.3
-        name: Execute all unit and integration tests and build examples
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          command: update
-          args: -Z minimal-versions
-      - uses: actions-rs/cargo@v1.0.3
-        name: Check the formatting of the code
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          command: fmt
-          args: --all -- --check
-      - uses: actions-rs/cargo@v1.0.3
-        name: Lint the code with clippy
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          command: clippy
-          args: --all-targets --all-features -- -D warnings -D clippy::all -D clippy::pedantic -D clippy::cargo -A clippy::multiple-crate-versions
+
   security-audit:
     runs-on: ubuntu-latest
     steps:
