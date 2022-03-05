@@ -148,9 +148,12 @@ jobs:
       shell: bash
       if: runner.os == 'Windows' && inputs.run_on_windows == true
       run: |
+        set -euo pipefail
+        
         mkdir -p "$HOME/.local/bin"
-        URL="$(curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | jq -r .assets[].browser_download_url | grep -F dasel_windows_amd64.exe)"
-        curl -Lo dasel_windows_amd64.exe "$URL" && mv dasel_windows_amd64 "$HOME/.local/bin/dasel.exe"
+        URL="$(curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | jq -r '.assets[].browser_download_url | select( . | contains("dasel_windows_amd64.exe"))')"
+        curl -Lo dasel_windows_amd64.exe "$URL"
+        mv dasel_windows_amd64.exe "$HOME/.local/bin/dasel.exe"
         chmod +x "$HOME/.local/bin/dasel.exe"
         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
     - uses: actions-rs/toolchain@v1.0.7
