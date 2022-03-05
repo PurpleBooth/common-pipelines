@@ -145,6 +145,7 @@ jobs:
       if: runner.os != 'Windows'
       run: brew install dasel
     - name: Install TOML Parser on Windows
+      shell: bash
       if: runner.os == 'Windows' && inputs.run_on_windows == true
       run: |
         mkdir -p "$HOME/.local/bin"
