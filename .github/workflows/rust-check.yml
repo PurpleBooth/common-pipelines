@@ -149,7 +149,7 @@ jobs:
       if: runner.os == 'Windows' && inputs.run_on_windows == true
       run: |
         set -euo pipefail
-        
+
         mkdir -p "$HOME/.local/bin"
         URL="$(curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | jq -r '.assets[].browser_download_url | select( . | contains("dasel_windows_amd64.exe"))')"
         curl -Lo dasel_windows_amd64.exe "$URL"
@@ -164,17 +164,12 @@ jobs:
         profile: minimal
         toolchain: nightly
         default: true
-    - uses: actions-rs/cargo@v1.0.3
-      name: Install the oldest possible versions of dependencies
+    - run: cat Cargo.toml | dasel -m -r toml .dependencies.- | xargs  -I {}  cargo
+        update -Z minimal-versions -p "{}"
+      name: Downgrade dependencies to lowest possible version
+      shell: bash
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
-      with:
-        command: update
-        args: -Z minimal-versions
-    - run: cat Cargo.toml | dasel -m -r toml .dev-dependencies.- | xargs  -I {}  cargo
-        update -p "{}"
-      name: Upgrade the dev dependencies back to latest versions
-      shell: bash
     - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
