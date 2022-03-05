@@ -141,6 +141,16 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - name: Install TOML Parser on Linux or Mac
+      if: runner.os != 'Windows'
+      run: brew install dasel
+    - name: Install TOML Parser on Windows
+      if: runner.os == 'Windows' && inputs.run_on_windows == true
+      run: |
+        mkdir -p "$HOME/.local/bin"
+        curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | grep browser_download_url | grep dasel_windows_amd64.exe | cut -d '"' -f 4 | wget -qi - && mv dasel_linux_amd64 "$HOME/.local/bin/dasel"
+        chmod +x "$HOME/.local/bin/dasel"
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
     - uses: actions-rs/toolchain@v1.0.7
       name: Setup the nightly rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
@@ -156,6 +166,8 @@ jobs:
       with:
         command: update
         args: -Z minimal-versions
+    - run: cat Cargo.toml | dasel -m -r toml .dev-dependencies.- | xargs cargo update
+      name: Upgrade the dev dependencies back to latest versions
     - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
