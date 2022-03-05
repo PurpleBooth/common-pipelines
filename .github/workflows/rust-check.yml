@@ -171,6 +171,12 @@ jobs:
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
     - uses: actions-rs/cargo@v1.0.3
+      name: Show which versions of dependencies were selected for debugging purposes
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )
+      with:
+        command: tree
+    - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
