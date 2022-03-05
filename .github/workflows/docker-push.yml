@@ -7,7 +7,7 @@ on:
         required: true
       platforms:
         type: string
-        description: "List of target platforms for build"
+        description: List of target platforms for build
         required: false
 jobs:
   docker-push:
@@ -29,7 +29,8 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ github.token }}
-    - run: echo ::set-output "name=repository::$( echo "ghcr.io/$REPOSITORY" | tr '[:upper:]' '[:lower:]')"
+    - run: echo ::set-output "name=repository::$( echo "ghcr.io/$REPOSITORY" | tr
+        '[:upper:]' '[:lower:]')"
       id: docker
       name: Turn repository name into docker registry name
       env:

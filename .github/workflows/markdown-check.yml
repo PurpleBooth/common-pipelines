@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - "*"
+    - '*'
   pull_request:
   workflow_dispatch:
   workflow_call:
@@ -15,11 +15,11 @@ jobs:
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout
-      - uses: PurpleBooth/gfmfmt-action@v2.0.6
-        name: Check markdown formatting
-        if: inputs.skip_formatting == false
-      - uses: gaurav-nelson/github-action-markdown-link-check@1.0.13
-        name: Check links are valid
+    - uses: actions/checkout@v3
+      name: Checkout
+    - uses: PurpleBooth/gfmfmt-action@v2.0.6
+      name: Check markdown formatting
+      if: inputs.skip_formatting == false
+    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.13
+      name: Check links are valid
 

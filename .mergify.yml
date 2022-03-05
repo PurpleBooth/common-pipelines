@@ -1,61 +1,61 @@
 queue_rules:
-  - name: default
-    speculative_checks: 20
-    batch_size: 20
-    conditions:
-      - check-success=lint-markdown
-      - check-success=specdown (macos-latest)
-      - check-success=specdown (ubuntu-latest)
-      - check-success=specdown (windows-latest) 
-      - check-success=docker-build
-      - check-success=version
-      - check-success=check
-      - check-success=test (macos-latest)
-      - check-success=test (ubuntu-latest)
-      - check-success=test (windows-latest)
-      - check-success=lints (macos-latest)
-      - check-success=lints (ubuntu-latest)
-      - check-success=lints (windows-latest)
-      - check-success=security-audit
-      - check-success=bench (macos-latest)
-      - check-success=bench (ubuntu-latest)
-      - check-success=bench (windows-latest) 
-      - base=main
+- name: default
+  speculative_checks: 20
+  batch_size: 20
+  conditions:
+  - check-success=lint-markdown
+  - check-success=specdown (macos-latest)
+  - check-success=specdown (ubuntu-latest)
+  - check-success=specdown (windows-latest)
+  - check-success=docker-build
+  - check-success=version
+  - check-success=check
+  - check-success=test (macos-latest)
+  - check-success=test (ubuntu-latest)
+  - check-success=test (windows-latest)
+  - check-success=lints (macos-latest)
+  - check-success=lints (ubuntu-latest)
+  - check-success=lints (windows-latest)
+  - check-success=security-audit
+  - check-success=bench (macos-latest)
+  - check-success=bench (ubuntu-latest)
+  - check-success=bench (windows-latest)
+  - base=main
 
 pull_request_rules:
-  - name: request review on external contributor
-    conditions:
-      - -author=PurpleBooth
-    actions:
-      assign:
-        add_users:
-          - PurpleBooth
+- name: request review on external contributor
+  conditions:
+  - -author=PurpleBooth
+  actions:
+    assign:
+      add_users:
+      - PurpleBooth
 
-  - name: automatic rebase for dependencies
-    conditions:
-      - check-success=lint-markdown
-      - check-success=specdown (macos-latest)
-      - check-success=specdown (ubuntu-latest)
-      - check-success=specdown (windows-latest) 
-      - check-success=docker-build
-      - check-success=version
-      - check-success=check
-      - check-success=test (macos-latest)
-      - check-success=test (ubuntu-latest)
-      - check-success=test (windows-latest)
-      - check-success=lints (macos-latest)
-      - check-success=lints (ubuntu-latest)
-      - check-success=lints (windows-latest)
-      - check-success=security-audit
-      - check-success=bench (macos-latest)
-      - check-success=bench (ubuntu-latest)
-      - check-success=bench (windows-latest) 
-      - base=main
-      - or:
-        - author~=^dependabot(|-preview)\[bot\]$
-        - author=PurpleBooth
-    actions:
-      queue:
-        method: rebase
-        rebase_fallback: merge
-        name: default
+- name: automatic rebase for dependencies
+  conditions:
+  - check-success=lint-markdown
+  - check-success=specdown (macos-latest)
+  - check-success=specdown (ubuntu-latest)
+  - check-success=specdown (windows-latest)
+  - check-success=docker-build
+  - check-success=version
+  - check-success=check
+  - check-success=test (macos-latest)
+  - check-success=test (ubuntu-latest)
+  - check-success=test (windows-latest)
+  - check-success=lints (macos-latest)
+  - check-success=lints (ubuntu-latest)
+  - check-success=lints (windows-latest)
+  - check-success=security-audit
+  - check-success=bench (macos-latest)
+  - check-success=bench (ubuntu-latest)
+  - check-success=bench (windows-latest)
+  - base=main
+  - or:
+    - author~=^dependabot(|-preview)\[bot\]$
+    - author=PurpleBooth
+  actions:
+    queue:
+      method: rebase
+      rebase_fallback: merge
+      name: default
