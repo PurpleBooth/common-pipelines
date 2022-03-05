@@ -166,7 +166,8 @@ jobs:
       with:
         command: update
         args: -Z minimal-versions
-    - run: cat Cargo.toml | dasel -m -r toml .dev-dependencies.- | xargs cargo update
+    - run: cat Cargo.toml | dasel -m -r toml .dev-dependencies.- | xargs  -I {}  cargo
+        update -p "{}"
       name: Upgrade the dev dependencies back to latest versions
     - uses: actions-rs/cargo@v1.0.3
       name: Execute all unit and integration tests and build examples
