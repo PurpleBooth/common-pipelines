@@ -141,7 +141,7 @@ jobs:
           toolchain: nightly
           default: true
       - uses: actions-rs/cargo@v1.0.3
-        name: Execute all unit and integration tests and build examples
+        name: Install the oldest possible versions of dependencies
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: update
@@ -249,7 +249,7 @@ jobs:
           default: true
           components: rustfmt, clippy
       - uses: actions-rs/cargo@v1.0.3
-        name: Execute all unit and integration tests and build examples
+        name: Install the oldest possible versions of dependencies
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         with:
           command: update
