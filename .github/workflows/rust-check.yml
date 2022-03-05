@@ -107,7 +107,7 @@ jobs:
         == true )
       with:
         command: test
-  test-minimal:
+  builds-with-minimal-deps:
     if: inputs.run_minimal_version_check == true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -153,7 +153,7 @@ jobs:
       shell: bash
       name: Remove any existing dependency calculations
     - uses: actions-rs/cargo@v1.0.3
-      name: Execute all unit and integration tests and build examples
+      name: Build with minimum versions of dependencies
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       with:
