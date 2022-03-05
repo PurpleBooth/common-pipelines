@@ -1,26 +1,26 @@
 on:
   push:
     branches:
-      - "*"
+    - '*'
   pull_request:
   workflow_dispatch:
   workflow_call:
     inputs:
       run_on_windows:
-        description: 'Enable checks on windows'
+        description: Enable checks on windows
         default: true
         required: false
         type: boolean
       windows_before_script:
-        default: ""
+        default: ''
         required: false
         type: string
       ubuntu_before_script:
-        default: ""
+        default: ''
         required: false
         type: string
       mac_before_script:
-        default: ""
+        default: ''
         required: false
         type: string
 
@@ -30,56 +30,62 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
-            pre_script: ${{ inputs.mac_before_script }}
-          - os: ubuntu-latest
-            pre_script: ${{ inputs.ubuntu_before_script }}
-          - os: windows-latest
-            pre_script: ${{ inputs.windows_before_script }}
+        - os: macos-latest
+          pre_script: ${{ inputs.mac_before_script }}
+        - os: ubuntu-latest
+          pre_script: ${{ inputs.ubuntu_before_script }}
+        - os: windows-latest
+          pre_script: ${{ inputs.windows_before_script }}
     steps:
-      - run: ${{ matrix.pre_script }}
-        name: Install dependencies
-        if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
-      - uses: actions/checkout@v3
-        name: Checkout the repository
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      - uses: actions/cache@v2
-        name: Setup the cache
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          path: |
-            .cache
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: specdown/setup-specdown-action@v0.2.8
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        name: Download Specdown
-      - uses: actions-rs/toolchain@v1.0.7
-        name: Setup the stable rust toolchain
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - name: Prevent windows from trying to start WSL
-        if: runner.os == 'Windows' && inputs.run_on_windows == true
-        run: |
-          takeown /F C:\Windows\System32\bash.exe
-          icacls C:\Windows\System32\bash.exe /grant administrators:F
-          ren C:\Windows\System32\bash.exe wsl-bash.exe
-      - uses: extractions/setup-just@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          if [ -f "Makefile" ]; then
-            make specdown
-          else
-            just specdown
-          fi
-        shell: bash
-        name: Run specdown
-        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+    - run: ${{ matrix.pre_script }}
+      name: Install dependencies
+      if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )) && matrix.pre_script != ''
+    - uses: actions/checkout@v3
+      name: Checkout the repository
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )
+    - uses: actions/cache@v2
+      name: Setup the cache
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )
+      with:
+        path: |
+          .cache
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - uses: specdown/setup-specdown-action@v0.2.8
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )
+      name: Download Specdown
+    - uses: actions-rs/toolchain@v1.0.7
+      name: Setup the stable rust toolchain
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )
+      with:
+        profile: minimal
+        toolchain: stable
+        default: true
+    - name: Prevent windows from trying to start WSL
+      if: runner.os == 'Windows' && inputs.run_on_windows == true
+      run: |
+        takeown /F C:\Windows\System32\bash.exe
+        icacls C:\Windows\System32\bash.exe /grant administrators:F
+        ren C:\Windows\System32\bash.exe wsl-bash.exe
+    - uses: extractions/setup-just@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: |
+        if [ -f "Makefile" ]; then
+          make specdown
+        else
+          just specdown
+        fi
+      shell: bash
+      name: Run specdown
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+        == true )

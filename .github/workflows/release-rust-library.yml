@@ -2,16 +2,16 @@ on:
   workflow_call:
     inputs:
       current_version:
-        description: 'The current version'
+        description: The current version
         type: string
         required: true
       previous_version:
-        description: 'The previous version'
+        description: The previous version
         type: string
         required: true
     secrets:
       cargo_token:
-        description: 'CARGO_TOKEN to use'
+        description: CARGO_TOKEN to use
         required: true
 
 
@@ -19,43 +19,43 @@ jobs:
   release-crate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout the repository
-        with:
-          ref: v${{ inputs.current_version }}
-          fetch-depth: 0
-      - uses: actions-rs/toolchain@v1.0.7
-        name: Install rust stable
-        with:
-          toolchain: stable
-          profile: default
-      - env:
-          CARGO_TOKEN: ${{ secrets.cargo_token }}
-        name: Publish to cargo
-        run: |
-          cargo login "$CARGO_TOKEN"
-          cargo publish
+    - uses: actions/checkout@v3
+      name: Checkout the repository
+      with:
+        ref: v${{ inputs.current_version }}
+        fetch-depth: 0
+    - uses: actions-rs/toolchain@v1.0.7
+      name: Install rust stable
+      with:
+        toolchain: stable
+        profile: default
+    - env:
+        CARGO_TOKEN: ${{ secrets.cargo_token }}
+      name: Publish to cargo
+      run: |
+        cargo login "$CARGO_TOKEN"
+        cargo publish
 
   github-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout the repository
-        with:
-          ref: v${{ inputs.current_version }}
-          fetch-depth: 0
-      - uses: PurpleBooth/changelog-action@v0.3.2
-        name: Generate the changelog
-        with:
-          args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
-      - env:
-          GITHUB_TOKEN: ${{ github.token }}
-        id: create_release
-        name: Create gitub release
-        uses: ncipollo/release-action@v1.9.0
-        with:
-          allowUpdates: true
-          token: ${{ github.token }}
-          bodyFile: CHANGELOG.md
-          name: Release v${{ inputs.current_version }}
-          tag: v${{ inputs.current_version }}
+    - uses: actions/checkout@v3
+      name: Checkout the repository
+      with:
+        ref: v${{ inputs.current_version }}
+        fetch-depth: 0
+    - uses: PurpleBooth/changelog-action@v0.3.2
+      name: Generate the changelog
+      with:
+        args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
+    - env:
+        GITHUB_TOKEN: ${{ github.token }}
+      id: create_release
+      name: Create gitub release
+      uses: ncipollo/release-action@v1.9.0
+      with:
+        allowUpdates: true
+        token: ${{ github.token }}
+        bodyFile: CHANGELOG.md
+        name: Release v${{ inputs.current_version }}
+        tag: v${{ inputs.current_version }}
