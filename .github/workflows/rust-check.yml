@@ -236,13 +236,7 @@ jobs:
         token: ${{ github.token }}
   security-audit-minimal:
     if: inputs.run_minimal_version_check == true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-        - os: macos-latest
-        - os: ubuntu-latest
-        - os: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.4.0
       name: Checkout the repository
@@ -259,17 +253,12 @@ jobs:
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: actions-rs/toolchain@v1.0.7
       name: Setup the nightly rust toolchain
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
       with:
         profile: minimal
         toolchain: nightly
         default: true
-        components: rustfmt, clippy
     - uses: actions-rs/cargo@v1.0.3
       name: Install the oldest possible versions of dependencies
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
       with:
         command: update
         args: -Z minimal-versions
