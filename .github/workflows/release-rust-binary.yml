@@ -133,7 +133,7 @@ jobs:
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: actions/download-artifact@v2
       name: Retrieve assets
-    - uses: PurpleBooth/changelog-action@v0.3.2
+    - uses: PurpleBooth/changelog-action@v0.3.3
       name: Generate changelog
       with:
         args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
