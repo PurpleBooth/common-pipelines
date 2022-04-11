@@ -131,7 +131,7 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       name: Retrieve assets
     - uses: PurpleBooth/changelog-action@v0.3.3
       name: Generate changelog
