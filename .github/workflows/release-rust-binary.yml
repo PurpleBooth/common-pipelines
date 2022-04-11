@@ -89,7 +89,7 @@ jobs:
         REPOSITORY_NAME: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}
       run: mv ./target/release/$REPOSITORY_NAME$EXTENSION ./$REPOSITORY_NAME-$TARGET$EXTENSION
       shell: bash
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       name: Store built binary version
