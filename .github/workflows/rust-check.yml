@@ -37,7 +37,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -76,7 +76,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -124,7 +124,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -169,7 +169,7 @@ jobs:
         - os: ubuntu-latest
         - os: windows-latest
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -214,7 +214,7 @@ jobs:
   security-audit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -235,7 +235,7 @@ jobs:
     if: inputs.run_minimal_version_check == true
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -279,7 +279,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
