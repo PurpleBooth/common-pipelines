@@ -52,7 +52,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       id: create_release
       name: Create gitub release
-      uses: ncipollo/release-action@v1.10.0
+      uses: ncipollo/release-action@v1.11.0
       with:
         allowUpdates: true
         token: ${{ github.token }}
