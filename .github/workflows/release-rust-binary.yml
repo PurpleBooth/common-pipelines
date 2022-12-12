@@ -141,7 +141,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       id: create_release
       name: Create github release
-      uses: ncipollo/release-action@v1.11.2
+      uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
         token: ${{ github.token }}
