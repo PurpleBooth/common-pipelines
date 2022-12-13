@@ -15,7 +15,7 @@ jobs:
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.1.0
+    - uses: actions/checkout@v3.2.0
       name: Checkout
     - uses: PurpleBooth/gfmfmt-action@v2.0.10
       name: Check markdown formatting
