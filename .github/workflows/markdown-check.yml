@@ -20,6 +20,6 @@ jobs:
     - uses: PurpleBooth/gfmfmt-action@v2.0.13
       name: Check markdown formatting
       if: inputs.skip_formatting == false
-    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.14
+    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.15
       name: Check links are valid
 
