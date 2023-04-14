@@ -37,7 +37,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -76,7 +76,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -124,7 +124,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -173,7 +173,7 @@ jobs:
       id: set-up-homebrew
       if: runner.os != 'Windows'
       uses: Homebrew/actions/setup-homebrew@master
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
@@ -218,7 +218,7 @@ jobs:
   security-audit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -239,7 +239,7 @@ jobs:
     if: inputs.run_minimal_version_check == true
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
     - uses: actions/cache@v3
       name: Setup the cache
@@ -283,7 +283,7 @@ jobs:
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.5.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
