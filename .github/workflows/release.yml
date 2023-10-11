@@ -62,7 +62,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       name: Generate the github release
       id: create_release
-      uses: ncipollo/release-action@v1.12.0
+      uses: ncipollo/release-action@v1.13.0
       with:
         allowUpdates: true
         token: ${{ github.token }}
