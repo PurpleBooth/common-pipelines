@@ -15,7 +15,7 @@ jobs:
       previous_version: ${{ steps.previous_version.outputs.previous_version }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.5.3
+    - uses: actions/checkout@v4.1.1
       name: Checkout the code
       with:
         fetch-depth: 0
@@ -48,7 +48,7 @@ jobs:
     needs:
     - release
     steps:
-    - uses: actions/checkout@v3.5.3
+    - uses: actions/checkout@v4.1.1
       name: Checkout the repository
       with:
         ref: v${{  needs.release.outputs.current_version }}
