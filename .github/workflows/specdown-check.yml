@@ -62,7 +62,7 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: specdown/setup-specdown-action@v0.2.8
+    - uses: specdown/setup-specdown-action@v0.2.28
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       name: Download Specdown
