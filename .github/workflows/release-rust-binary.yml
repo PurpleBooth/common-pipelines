@@ -45,7 +45,7 @@ jobs:
       name: Checkout the repository
       with:
         ref: v${{ inputs.current_version }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       name: Setup Cache
@@ -120,7 +120,7 @@ jobs:
       with:
         ref: v${{ inputs.current_version }}
         fetch-depth: 0
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       name: Setup Cache
       with:
         path: |

@@ -49,7 +49,7 @@ jobs:
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       name: Setup the cache
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
