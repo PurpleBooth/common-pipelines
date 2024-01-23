@@ -21,8 +21,3 @@ jobs:
         cargo install versio
     - name: Check projects
       run: versio check
-    - name: Print changes
-      run: versio plan
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        GITHUB_USER: ${{ github.actor }}
