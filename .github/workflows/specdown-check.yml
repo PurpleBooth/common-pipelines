@@ -71,9 +71,7 @@ jobs:
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       with:
-        profile: minimal
         toolchain: stable
-        default: true
     - name: Prevent windows from trying to start WSL
       if: runner.os == 'Windows' && inputs.run_on_windows == true
       run: |
