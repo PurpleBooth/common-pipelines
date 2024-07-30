@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.1 - 2024-07-30
+#### Bug Fixes
+- changelog argument formatting in release workflow - (5fe38b6) - Billie Thompson
+
+- - -
+
 ## v0.8.0 - 2024-07-30
 #### Bug Fixes
 - Switch to binstall for installing just - (b04bf8c) - Billie Thompson
