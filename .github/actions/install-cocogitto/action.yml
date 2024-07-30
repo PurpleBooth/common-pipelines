@@ -14,7 +14,7 @@ runs:
       run: |
         echo "install-dir=$( mktemp -d )" >> "$GITHUB_OUTPUT"
         if [ "$VERSION" == "latest" ] ; then
-          echo version="$( curl --silent -I https://github.com/cocogitto/cocogitto/releases/latest/download | grep -F location | cut -d "/" -f8 | cut -c1- )" >> "$GITHUB_OUTPUT"
+          echo version="$( curl --silent -o /dev/null -D - https://github.com/cocogitto/cocogitto/releases/latest/download | grep -iF location: | cut -d "/" -f8 | cut -c1-  )" >> "$GITHUB_OUTPUT"
         else
           echo version="$VERSION" >> "$GITHUB_OUTPUT"
         fi
@@ -42,7 +42,7 @@ runs:
         echo curl -Lo cocogitto.tar.gz "https://github.com/cocogitto/cocogitto/releases/download/$VERSION/cocogitto-$VERSION-x86_64-unknown-linux-musl.tar.gz"
         curl -Lo cocogitto.tar.gz "https://github.com/cocogitto/cocogitto/releases/download/$VERSION/cocogitto-$VERSION-x86_64-unknown-linux-musl.tar.gz"
         tar -C "$INSTALL_DIR" -xzvfcocogitto.tar.gz
-        rm cocogitto.tar.gz
+        rm -v cocogitto.tar.gz
         echo "$INSTALL_DIR/x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
       shell: bash
 outputs:
