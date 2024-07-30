@@ -8,11 +8,6 @@ jobs:
 
   release:
     if: github.ref == 'refs/heads/main'
-    needs:
-      - commit-checks
-      - specdown
-      - lint-markdown
-      - rust-checks
     outputs:
       version_bump: ${{ steps.current_version.outputs.current_version != steps.previous_version.outputs.previous_version }}
       current_version: ${{ steps.current_version.outputs.current_version }}

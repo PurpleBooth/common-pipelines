@@ -74,6 +74,7 @@ jobs:
         toolchain: stable
     - name: Prevent windows from trying to start WSL
       if: runner.os == 'Windows' && inputs.run_on_windows == true
+      shell: pwsh
       run: |
         takeown /F C:\Windows\System32\bash.exe
         icacls C:\Windows\System32\bash.exe /grant administrators:F
