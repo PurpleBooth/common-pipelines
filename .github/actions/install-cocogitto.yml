@@ -1,0 +1,48 @@
+---
+name: Setup cocogitto
+description: Installs https://github.com/cocogitto/cocogitto
+inputs:
+  version:
+    default: "latest"
+    description: Version to install
+
+runs:
+  using: composite
+  steps:
+    - name: Create install path
+      id: facts
+      run: |
+        echo "install-dir=$( mktemp -d )" >> "$GITHUB_OUTPUT"
+        if [ "$VERSION" == "latest" ] ; then
+          echo version="$( curl --silent -I https://github.com/cocogitto/cocogitto/releases/latest/download | grep -F location | cut -d "/" -f8 | cut -c1- )" >> "$GITHUB_OUTPUT"
+        else
+          echo version="$VERSION" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+    - name: Add to path
+      env:
+        INSTALL_DIR: ${{ steps.facts.outputs.install-dir }}
+      run: |
+        echo "$INSTALL_DIR/x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+      shell: bash
+    - name: Cache
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.facts.outputs.install-dir }}
+        key: ${{ runner.os }}-cocogitto
+    - name: Install
+      env:
+        INSTALL_DIR: ${{ steps.facts.outputs.install-dir }}
+        VERSION: ${{ steps.facts.outputs.version }}
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        curl -Lo - "https://github.com/cocogitto/cocogitto/releases/download/$VERSION/cocogitto-$VERSION-x86_64-unknown-linux-musl.tar.gz" | tar -C "$INSTALL_DIR" -xzvf-
+        echo "$INSTALL_DIR/x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+      shell: bash
+outputs:
+  version:
+    description: Version installed
+    value: "${{ steps.facts.outputs.version }}"
