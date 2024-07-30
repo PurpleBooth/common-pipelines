@@ -58,8 +58,7 @@ jobs:
     - uses: PurpleBooth/changelog-action@v0.3.3
       name: Generate the changelog
       with:
-        args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version
-          }}
+        args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
     - env:
         GITHUB_TOKEN: ${{ github.token }}
       name: Generate the github release
