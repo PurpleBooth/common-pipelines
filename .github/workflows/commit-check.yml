@@ -15,6 +15,6 @@ jobs:
       with:
         fetch-depth: 0
     - name: Install cocogitto
-      uses: PurpleBooth/common-pipelines/.github/actions/install-cocogitto.yml@main
+      uses: PurpleBooth/common-pipelines/.github/actions/install-cocogitto@main
     - name: Check projects
       run: cog check
