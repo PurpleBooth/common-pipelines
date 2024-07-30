@@ -11,7 +11,6 @@ on:
     inputs:
       run_on_windows:
         description: Enable checks on windows
-        default: true
         required: false
         type: boolean
       run_minimal_version_check:
@@ -50,12 +49,10 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the stable rust toolchain
       with:
-        profile: minimal
         toolchain: stable
-        default: true
     - run: cargo check
       name: Check package and all of its dependencies for errors
 
@@ -89,13 +86,11 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the stable rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        profile: minimal
         toolchain: stable
-        default: true
     - run: cargo test
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
@@ -131,13 +126,11 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the nightly rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        profile: minimal
         toolchain: nightly
-        default: true
     - run: rm Cargo.lock || true
       shell: bash
       name: Remove any existing dependency calculations
@@ -173,13 +166,11 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the nightly rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        profile: minimal
         toolchain: nightly
-        default: true
         components: rustfmt, clippy
     - run: cargo fmt --all -- --check
       name: Check the formatting of the code
@@ -226,17 +217,12 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the nightly rust toolchain
       with:
-        profile: minimal
         toolchain: nightly
-        default: true
-    - uses: actions-rs/cargo@v1.0.3
+    - run: cargo update -Z minimal-versions
       name: Install the oldest possible versions of dependencies
-      with:
-        command: update
-        args: -Z minimal-versions
     - uses: rustsec/audit-check@v1.4.1
       name: Audit check cargo packages
       with:
@@ -271,13 +257,11 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       name: Setup the stable rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        profile: minimal
         toolchain: stable
-        default: true
     - run: cargo bench
       name: Execute all benchmarks
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )

@@ -58,21 +58,16 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions-rs/toolchain@v1.0.7
+    - uses: dtolnay/rust-toolchain@master
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       name: Install rust toolchain
       with:
-        default: true
-        profile: minimal
         toolchain: stable
-    - uses: actions-rs/cargo@v1.0.3
+    - run: cargo build --release
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
       name: Build release version
-      with:
-        args: --release
-        command: build
     - id: get_repository_name
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
         == true )
