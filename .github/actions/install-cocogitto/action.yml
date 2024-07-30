@@ -39,7 +39,6 @@ runs:
         VERSION: ${{ steps.facts.outputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        echo curl -Lo cocogitto.tar.gz "https://github.com/cocogitto/cocogitto/releases/download/$VERSION/cocogitto-$VERSION-x86_64-unknown-linux-musl.tar.gz"
         curl -Lo cocogitto.tar.gz "https://github.com/cocogitto/cocogitto/releases/download/$VERSION/cocogitto-$VERSION-x86_64-unknown-linux-musl.tar.gz"
         tar -C "$INSTALL_DIR" -xzvfcocogitto.tar.gz
         rm -v cocogitto.tar.gz
