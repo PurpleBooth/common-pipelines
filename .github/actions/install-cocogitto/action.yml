@@ -14,7 +14,7 @@ runs:
       run: |
         echo "install-dir=$( mktemp -d )" >> "$GITHUB_OUTPUT"
         if [ "$VERSION" == "latest" ] ; then
-          echo version="$( curl --silent -I https://github.com/cocogitto/cocogitto/releases/latest/download | grep -F location | cut -d "/" -f8 | cut -c1- )" >> "$GITHUB_OUTPUT"
+          echo version="$( curl --silent -I https://github.com/cocogitto/cocogitto/releases/latest/download | grep -F location | cut -d "/" -f8 | cut -c1- | sed 's/ *$//g' )" >> "$GITHUB_OUTPUT"
         else
           echo version="$VERSION" >> "$GITHUB_OUTPUT"
         fi
