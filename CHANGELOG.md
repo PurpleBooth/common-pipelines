@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.4 - 2024-07-31
+#### Bug Fixes
+- **(deps)** bump docker/login-action from 2.2.0 to 3.3.0 - (01ce4ba) - dependabot[bot]
+- **(deps)** bump docker/build-push-action from 4.1.1 to 6.5.0 - (de02a44) - dependabot[bot]
+- **(deps)** bump actions/checkout from 4.1.3 to 4.1.7 - (96390a8) - dependabot[bot]
+
+- - -
+
 ## v0.8.3 - 2024-07-31
 #### Bug Fixes
 - **(deps)** bump actions/upload-artifact from 3 to 4 - (9913582) - dependabot[bot]
