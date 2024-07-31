@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.6 - 2024-07-31
+#### Bug Fixes
+- **(deps)** bump ncipollo/release-action from 1.12.0 to 1.14.0 - (050a4ee) - dependabot[bot]
+
+- - -
+
 ## v0.8.5 - 2024-07-31
 #### Bug Fixes
 - **(deps)** bump actions/download-artifact from 3 to 4 - (64beae9) - dependabot[bot]
