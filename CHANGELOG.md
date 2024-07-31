@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.8 - 2024-07-31
+#### Bug Fixes
+- Ignore changelog - (e776d9c) - Billie Thompson
+
+- - -
+
 ## v0.8.7 - 2024-07-31
 #### Bug Fixes
 - **(deps)** bump docker/setup-qemu-action from 2.2.0 to 3.2.0 - (419bb9c) - dependabot[bot]
