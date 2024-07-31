@@ -46,7 +46,7 @@ jobs:
     - run: ${{ matrix.pre_script }}
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
-    - uses: actions/checkout@v4.1.3
+    - uses: actions/checkout@v4.1.7
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
     - uses: actions/cache@v4
