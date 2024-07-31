@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.3 - 2024-07-31
+#### Bug Fixes
+- **(deps)** bump actions/upload-artifact from 3 to 4 - (9913582) - dependabot[bot]
+
+- - -
+
 ## v0.8.2 - 2024-07-31
 #### Bug Fixes
 - **(deps)** bump docker/setup-buildx-action from 3.3.0 to 3.6.1 - (e8c150a) - dependabot[bot]
