@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.14 - 2024-08-01
+#### Bug Fixes
+- Add id-token for signing - (d040f06) - Billie Thompson
+
+- - -
+
 ## v0.8.13 - 2024-08-01
 #### Bug Fixes
 - Add cosign - (b2374f4) - Billie Thompson
