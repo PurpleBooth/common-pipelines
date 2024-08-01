@@ -132,6 +132,14 @@ jobs:
       name: Generate changelog
       with:
         args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
+    - name: Generate hashes
+      run: |
+        cd bins
+        for file in *; do
+          sha256sum "$file" > "$file.sha256"
+          md5sum "$file" > "$file.md5"
+          crc32 "$file" > "$file.crc32"
+        done
     - env:
         GITHUB_TOKEN: ${{ github.token }}
       id: create_release
@@ -143,7 +151,7 @@ jobs:
         bodyFile: CHANGELOG.md
         name: Release v${{ inputs.current_version }}
         tag: v${{ inputs.current_version }}
-        artifacts: ./bins/**/*
+        artifacts: ./bins/*
   generate-formula:
     name: Generate Homebrew Formula
     runs-on: ubuntu-latest
