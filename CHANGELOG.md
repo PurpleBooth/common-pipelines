@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.15 - 2024-08-01
+#### Bug Fixes
+- Switch to taiki-e - (5aa904a) - Billie Thompson
+
+- - -
+
 ## v0.8.14 - 2024-08-01
 #### Bug Fixes
 - Add id-token for signing - (d040f06) - Billie Thompson
