@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.21 - 2024-08-01
+#### Bug Fixes
+- Remove stray colon - (c5599d1) - Billie Thompson
+
+- - -
+
 ## v0.8.20 - 2024-08-01
 #### Bug Fixes
 - Use current action - (449c712) - Billie Thompson
