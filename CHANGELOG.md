@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.18 - 2024-08-01
+#### Bug Fixes
+- Add attest - (8c0424b) - Billie Thompson
+
+- - -
+
 ## v0.8.17 - 2024-08-01
 #### Bug Fixes
 - Correct version of upload artifact in action - (de59cdd) - Billie Thompson
