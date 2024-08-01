@@ -124,6 +124,9 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: actions/download-artifact@v4
+      with:
+        merge-multiple: true
+        path: bins
       name: Retrieve assets
     - uses: PurpleBooth/changelog-action@v0.3.3
       name: Generate changelog
@@ -140,8 +143,7 @@ jobs:
         bodyFile: CHANGELOG.md
         name: Release v${{ inputs.current_version }}
         tag: v${{ inputs.current_version }}
-        artifacts: ./bins-*/*
-
+        artifacts: ./bins/**/*
   generate-formula:
     name: Generate Homebrew Formula
     runs-on: ubuntu-latest
