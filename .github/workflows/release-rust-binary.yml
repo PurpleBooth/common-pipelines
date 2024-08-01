@@ -103,6 +103,9 @@ jobs:
           install: ''
 
   github-release:
+    permissions:
+      contents: read
+      id-token: write
     needs:
     - build
     runs-on: ubuntu-latest
