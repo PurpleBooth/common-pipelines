@@ -130,6 +130,7 @@ jobs:
       with:
         merge-multiple: true
         path: bins
+        pattern: bins-*
       name: Retrieve assets
 
     - name: Install cosign
