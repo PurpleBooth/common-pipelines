@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
-      - uses: cargo-bins/cargo-binstall@main
+      - uses: taiki-e/install-action@cargo-binstall
         name: Install cargo binstall
       - name: Get tags
         run: git fetch --tags origin

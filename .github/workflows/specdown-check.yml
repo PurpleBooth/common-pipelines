@@ -41,7 +41,7 @@ jobs:
       id: set-up-homebrew
       if: runner.os != 'Windows'
       uses: Homebrew/actions/setup-homebrew@master
-    - uses: cargo-bins/cargo-binstall@main
+    - uses: taiki-e/install-action@cargo-binstall
       name: Install cargo binstall
     - run: ${{ matrix.pre_script }}
       name: Install dependencies
