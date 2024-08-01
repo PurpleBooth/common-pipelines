@@ -132,28 +132,15 @@ jobs:
         path: bins
         pattern: bins-*
       name: Retrieve assets
-
-    - name: Install cosign
-      uses: sigstore/cosign-installer@v3.5.0
-    - name: Authenticate with OIDC
-      id: auth
-      run: |
-        TOKEN="$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          "https://api.github.com/repos/$REPO/actions/runners/registration-token" | jq -r .token)"
-        echo "TOKEN=${TOKEN}" >> "$GITHUB_ENV"
-
+    - uses: actions/attest@v1
+      name: Attest binaries
+      with:
+        subject-path: bins/*
     - name: Sign binaries
-      env:
-        REPO: ${{ github.repository }}
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        COSIGN_EXPERIMENTAL: 1
-        AUTH_TOKEN: ${{ steps.auth.outputs.token }}
       run: |
         cd bins
         for file in *; do
           if [[ -f "$file" ]]; then
-            cosign sign-blob --oidc-token "$AUTH_TOKEN" "$file"
             sha256sum "$file" > "$file.sha256"
             md5sum "$file" > "$file.md5"
             crc32 "$file" > "$file.crc32"
