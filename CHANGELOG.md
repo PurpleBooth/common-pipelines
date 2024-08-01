@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.23 - 2024-08-01
+#### Bug Fixes
+- Give permisions to contents - (3d094d6) - Billie Thompson
+
+- - -
+
 ## v0.8.22 - 2024-08-01
 #### Bug Fixes
 - Remove crc - (c006a37) - Billie Thompson
