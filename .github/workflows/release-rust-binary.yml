@@ -143,7 +143,6 @@ jobs:
           if [[ -f "$file" ]]; then
             sha256sum "$file" > "$file.sha256"
             md5sum "$file" > "$file.md5"
-            crc32 "$file" > "$file.crc32"
           fi
         done
     - uses: PurpleBooth/changelog-action@v0.3.3
