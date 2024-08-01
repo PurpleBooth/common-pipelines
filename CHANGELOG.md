@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.20 - 2024-08-01
+#### Bug Fixes
+- Use current action - (449c712) - Billie Thompson
+
+- - -
+
 ## v0.8.19 - 2024-08-01
 #### Bug Fixes
 - add missing permision - (8ad3e9a) - Billie Thompson
