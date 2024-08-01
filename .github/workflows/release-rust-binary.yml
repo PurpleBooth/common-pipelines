@@ -104,8 +104,8 @@ jobs:
 
   github-release:
     permissions:
-      contents: read
       id-token: write
+      attestations: write
     needs:
     - build
     runs-on: ubuntu-latest
