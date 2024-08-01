@@ -132,10 +132,10 @@ jobs:
         path: bins
         pattern: bins-*
       name: Retrieve assets
-    - uses: actions/attest@v1
-      name: Attest binaries
+    - name: Attest binaries
+      uses: actions/attest-build-provenance@v1
       with:
-        subject-path: bins/*
+        subject-path: : bins/**/*
     - name: Sign binaries
       run: |
         cd bins
