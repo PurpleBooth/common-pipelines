@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.16 - 2024-08-01
+#### Bug Fixes
+- only download bins not other artifacts - (3ce58fb) - Billie Thompson
+#### Continuous Integration
+- **(Mergify)** configuration update - (952a3b7) - Billie Thompson
+- Ignore existing pr - (ec2ed8d) - Billie Thompson
+- Force push over old homebrew formula on rerun - (94b34e8) - Billie Thompson
+
+- - -
+
 ## v0.8.15 - 2024-08-01
 #### Bug Fixes
 - Switch to taiki-e - (5aa904a) - Billie Thompson
