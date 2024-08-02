@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.25 - 2024-08-02
+#### Bug Fixes
+- exclude the github directory - (b85fe11) - Billie Thompson
+
+- - -
+
 ## v0.8.24 - 2024-08-02
 #### Bug Fixes
 - Add attestations for docker images - (b540d6a) - Billie Thompson
