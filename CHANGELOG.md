@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.24 - 2024-08-02
+#### Bug Fixes
+- Add attestations for docker images - (b540d6a) - Billie Thompson
+#### Continuous Integration
+- Add renovate.json - (b60fa1d) - renovate[bot]
+
+- - -
+
 ## v0.8.23 - 2024-08-01
 #### Bug Fixes
 - Give permisions to contents - (3d094d6) - Billie Thompson
