@@ -11,6 +11,11 @@ on:
         required: false
 jobs:
   docker-push:
+    permissions:
+      id-token: write
+      packages: write
+      contents: read
+      attestations: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -36,6 +41,7 @@ jobs:
         REPOSITORY: ${{ github.repository }}
     - name: Test build
       uses: docker/build-push-action@v6.5.0
+      id: push
       with:
         context: .
         push: true
@@ -51,3 +57,21 @@ jobs:
           ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
           ${{ steps.docker.outputs.repository }}:latest
           ${{ steps.docker.outputs.repository }}:v${{ inputs.current_version }}
+    - name: Attest
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-name: ${{ steps.docker.outputs.repository }}:git-${{ github.sha }}
+        subject-digest: ${{ steps.push.outputs.digest }}
+        push-to-registry: true
+    - name: Attest
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-name: ${{ steps.docker.outputs.repository }}:v${{ inputs.current_version }}
+        subject-digest: ${{ steps.push.outputs.digest }}
+        push-to-registry: true
+    - name: Attest
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-name: ${{ steps.docker.outputs.repository }}:latest
+        subject-digest: ${{ steps.push.outputs.digest }}
+        push-to-registry: true
