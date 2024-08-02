@@ -21,7 +21,7 @@ jobs:
       name: Check markdown formatting
       if: inputs.skip_formatting == false
       with:
-        pattern: '^(?!.\/CHANGELOG\.md$).*\.md$'
+        pattern: '^(?!\.\/(?:CHANGELOG\.md|\.github\/.*)).*\.md$'
 
     - uses: gaurav-nelson/github-action-markdown-link-check@1.0.15
       name: Check links are valid
