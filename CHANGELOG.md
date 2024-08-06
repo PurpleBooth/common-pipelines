@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.26 - 2024-08-06
+#### Bug Fixes
+- Correct attestation - (7d43a78) - Billie Thompson
+#### Continuous Integration
+- Remove attestation for the git- tag as it fails - (5cd415d) - Billie Thompson
+#### Miscellaneous Chores
+- **(deps)** update actions/cache action to v4 - (6de0e83) - renovate[bot]
+
+- - -
+
 ## v0.8.25 - 2024-08-02
 #### Bug Fixes
 - exclude the github directory - (b85fe11) - Billie Thompson
