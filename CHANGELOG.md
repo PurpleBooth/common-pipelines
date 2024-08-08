@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.27 - 2024-08-08
+#### Bug Fixes
+- **(deps)** bump docker/build-push-action from 6.5.0 to 6.6.1 - (3d098b0) - dependabot[bot]
+
+- - -
+
 ## v0.8.26 - 2024-08-06
 #### Bug Fixes
 - Correct attestation - (7d43a78) - Billie Thompson
