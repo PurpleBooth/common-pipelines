@@ -27,7 +27,7 @@ jobs:
       env:
         REPOSITORY: ${{ github.repository }}
     - name: Test build
-      uses: docker/build-push-action@v6.6.1
+      uses: docker/build-push-action@v6.7.0
       with:
         context: .
         push: false
