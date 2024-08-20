@@ -43,12 +43,15 @@ jobs:
       with:
         ref: v${{ inputs.current_version }}
         fetch-depth: 0
-    - uses: PurpleBooth/changelog-action@v0.3.3
-      name: Generate the changelog
-      with:
-        args: -v v${{ inputs.previous_version }}..v${{ inputs.current_version }}
+    - uses: cargo-bins/cargo-binstall@main
+      name: Install cargo binstall
+    - shell: bash
+      run: cargo binstall --no-confirm --locked cocogitto
+    - run: cog changelog --at "$TAG_V" > CHANGELOG.md
+      shell: bash
     - env:
         GITHUB_TOKEN: ${{ github.token }}
+        TAG_V: v${{ inputs.current_version }}
       id: create_release
       name: Create gitub release
       uses: ncipollo/release-action@v1.14.0
