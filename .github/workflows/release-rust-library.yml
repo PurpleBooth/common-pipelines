@@ -49,9 +49,10 @@ jobs:
       run: cargo binstall --no-confirm --locked cocogitto
     - run: cog changelog --at "$TAG_V" > CHANGELOG.md
       shell: bash
+      env:
+        TAG_V: v${{ inputs.current_version }}
     - env:
         GITHUB_TOKEN: ${{ github.token }}
-        TAG_V: v${{ inputs.current_version }}
       id: create_release
       name: Create gitub release
       uses: ncipollo/release-action@v1.14.0
