@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.9.1 - 2024-08-21
+#### Bug Fixes
+- Build on appropriate architectures - (937eaec) - Billie Thompson
+- Default to amd and arm for docker images - (0daca32) - Billie Thompson
+#### Continuous Integration
+- Attest images and generate sbom - (2fc2d21) - Billie Thompson
+
+- - -
+
 ## v0.9.0 - 2024-08-21
 #### Continuous Integration
 - We have switched to renovate - (6f4b18e) - Billie Thompson
