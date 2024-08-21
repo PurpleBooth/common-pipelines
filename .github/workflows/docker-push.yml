@@ -9,6 +9,7 @@ on:
         type: string
         description: List of target platforms for build
         required: false
+        default: linux/amd64,linux/arm64
 jobs:
   docker-push:
     permissions:
