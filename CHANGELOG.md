@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.29 - 2024-08-21
+#### Bug Fixes
+- Use new link checker - (db02d92) - Billie Thompson
+#### Continuous Integration
+- Allow merge groups - (3a0bce8) - Billie Thompson
+- Allow merge groups - (f26ca43) - Billie Thompson
+- Use changelog fro cog - (447bb30) - Billie Thompson
+- correct env - (52c70cd) - Billie Thompson
+- Use cog to generate the changelog - (9cf5310) - Billie Thompson
+
+- - -
+
 ## v0.8.28 - 2024-08-14
 #### Bug Fixes
 - **(deps)** bump docker/build-push-action from 6.6.1 to 6.7.0 - (2d7dae7) - dependabot[bot]
