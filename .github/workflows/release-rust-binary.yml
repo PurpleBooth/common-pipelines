@@ -174,7 +174,7 @@ jobs:
     name: Generate Homebrew Formula
     runs-on: ubuntu-latest
     steps:
-    - uses: PurpleBooth/generate-formula-action@v0.1.13
+    - uses: PurpleBooth/generate-formula-action@v0.1.14
       name: Create PR for formula
       with:
         current_version: ${{ inputs.current_version }}
