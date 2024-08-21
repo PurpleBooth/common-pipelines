@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.9.0 - 2024-08-21
+#### Continuous Integration
+- We have switched to renovate - (6f4b18e) - Billie Thompson
+#### Features
+- Add sbom - (69b7a72) - Billie Thompson
+
+- - -
+
 ## v0.8.30 - 2024-08-21
 #### Bug Fixes
 - **(deps)** bump PurpleBooth/generate-formula-action - (24416c6) - dependabot[bot]
