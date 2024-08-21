@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.8.30 - 2024-08-21
+#### Bug Fixes
+- **(deps)** bump PurpleBooth/generate-formula-action - (24416c6) - dependabot[bot]
+
+- - -
+
 ## v0.8.29 - 2024-08-21
 #### Bug Fixes
 - Use new link checker - (db02d92) - Billie Thompson
