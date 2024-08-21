@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.9.2 - 2024-08-21
+#### Bug Fixes
+- use the check reporter - (384975e) - Billie Thompson
+
+- - -
+
 ## v0.9.1 - 2024-08-21
 #### Bug Fixes
 - Build on appropriate architectures - (937eaec) - Billie Thompson
