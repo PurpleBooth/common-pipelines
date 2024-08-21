@@ -25,4 +25,5 @@ jobs:
     - name: Check links are valid
       uses: umbrelladocs/action-linkspector@v1
       with:
+        reporter: github-check
         github_token: ${{ secrets.github_token }}
