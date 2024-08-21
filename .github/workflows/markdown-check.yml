@@ -22,7 +22,7 @@ jobs:
       if: inputs.skip_formatting == false
       with:
         pattern: '^(?!\.\/(?:CHANGELOG\.md|\.github\/.*)).*\.md$'
-
-    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.15
-      name: Check links are valid
-
+    - name: Check links are valid
+      uses: umbrelladocs/action-linkspector@v1
+      with:
+        github_token: ${{ secrets.github_token }}
