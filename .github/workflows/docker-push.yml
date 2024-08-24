@@ -40,7 +40,7 @@ jobs:
       name: Turn repository name into docker registry name
       env:
         REPOSITORY: ${{ github.repository }}
-    - name: Test build
+    - name: Build and push
       uses: docker/build-push-action@v6.7.0
       id: push
       with:
