@@ -46,13 +46,3 @@ jobs:
           cache-from: type=gha
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Test build to run
-        uses: docker/build-push-action@v6.7.0
-        with:
-          context: .
-          push: false
-          pull: true
-          load: true
-          cache-from: type=gha
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
