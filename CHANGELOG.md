@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.9.4 - 2024-08-24
+#### Bug Fixes
+- Try new docker authentication mechanism - (e2801ed) - Billie Thompson
+#### Continuous Integration
+- Remove duplicated build - (a1c46b3) - Billie Thompson
+
+- - -
+
 ## v0.9.3 - 2024-08-24
 #### Bug Fixes
 - Use metadata for builds rather than generating the tags - (1cfea4c) - Billie Thompson
