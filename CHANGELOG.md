@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.9.3 - 2024-08-24
+#### Bug Fixes
+- Use metadata for builds rather than generating the tags - (1cfea4c) - Billie Thompson
+- Switch to metadata for generating tags - (36950b6) - Billie Thompson
+#### Continuous Integration
+- Change name of build and push step - (7e6270f) - Billie Thompson
+#### Miscellaneous Chores
+- **(deps)** update actions/cache action to v4.0.2 - (53787ec) - renovate[bot]
+
+- - -
+
 ## v0.9.2 - 2024-08-21
 #### Bug Fixes
 - use the check reporter - (384975e) - Billie Thompson
