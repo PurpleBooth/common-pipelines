@@ -30,6 +30,10 @@ on:
         default: ''
         required: false
         type: string
+      mutation-testing-fail-build:
+        default: false
+        required: false
+        type: boolean
 
 
 jobs:
@@ -68,6 +72,8 @@ jobs:
         - os: windows-latest
           pre_script: ${{ inputs.windows_before_script }}
     steps:
+    - uses: cargo-bins/cargo-binstall@main
+      name: Install cargo binstall
     - run: ${{ matrix.pre_script }}
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
@@ -94,6 +100,12 @@ jobs:
     - run: cargo test
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+    - run: cargo binstall --no-confirm --locked cargo-mutants
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+    - run: cargo mutants --diff
+      continue-on-error: ${{inputs.mutation-testing-fail-build}}
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+
 
   builds-with-minimal-deps:
     if: inputs.run_minimal_version_check == true
