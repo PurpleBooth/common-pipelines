@@ -205,9 +205,13 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - run: cargo binstall --no-confirm --locked cargo-mutants
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      - run: cargo mutants --diff
+      - run: cargo mutants -vV --in-place
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mutants-out
+          path: mutants.out
 
 
   security-audit:
