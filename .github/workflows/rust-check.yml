@@ -30,7 +30,7 @@ on:
         default: ''
         required: false
         type: string
-      mutation-testing-fail-build:
+      mutation_testing:
         default: false
         required: false
         type: boolean
@@ -72,8 +72,6 @@ jobs:
         - os: windows-latest
           pre_script: ${{ inputs.windows_before_script }}
     steps:
-    - uses: cargo-bins/cargo-binstall@main
-      name: Install cargo binstall
     - run: ${{ matrix.pre_script }}
       name: Install dependencies
       if: (runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )) && matrix.pre_script != ''
@@ -100,12 +98,6 @@ jobs:
     - run: cargo test
       name: Execute all unit and integration tests and build examples
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-    - run: cargo binstall --no-confirm --locked cargo-mutants
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-    - run: cargo mutants --diff
-      continue-on-error: ${{inputs.mutation-testing-fail-build}}
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-
 
   builds-with-minimal-deps:
     if: inputs.run_minimal_version_check == true
@@ -190,7 +182,34 @@ jobs:
     - run: cargo clippy --all-targets --all-features -- -D warnings -D clippy::all -D clippy::pedantic
       name: Lint the code with clippy
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-        
+
+
+  mutation-testing:
+    runs-on: ubuntu-latest
+    if: inputs.mutation_testing == true
+    steps:
+      - uses: actions/checkout@v4.1.7
+        name: Checkout the repository
+      - uses: cargo-bins/cargo-binstall@main
+        name: Install cargo binstall
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Setup the cache
+        with:
+          path: |
+            .cache
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - run: cargo binstall --no-confirm --locked cargo-mutants
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+      - run: cargo mutants --diff
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+
+
+
   security-audit:
     runs-on: ubuntu-latest
     steps:
