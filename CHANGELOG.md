@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.10.0 - 2024-08-25
+#### Features
+- mutatuon testimg - (2f93800) - Billie Thompson
+
+- - -
+
 ## v0.9.4 - 2024-08-24
 #### Bug Fixes
 - Try new docker authentication mechanism - (e2801ed) - Billie Thompson
