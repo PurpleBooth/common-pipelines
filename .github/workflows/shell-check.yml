@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+    - '*'
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+  merge_group:
+
+jobs:
+  check-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Install Shfmt
+        uses: taiki-e/install-action@f172798ba087526822a4f43dd08714d08a45aa37 # v2
+        with:
+          tool: shfmt
+      - name: Install ShellCheck
+        uses: taiki-e/install-action@f172798ba087526822a4f43dd08714d08a45aa37 # v2
+        with:
+          tool: shellcheck
+      - name: Run Shfmt
+        run: shfmt --find . | xargs shfmt --simplify --diff
+      - name: Run ShellCheck
+        run: shfmt --find . | xargs shellcheck
