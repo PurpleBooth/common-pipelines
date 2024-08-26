@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.11.0 - 2024-08-26
+#### Continuous Integration
+- add mutants terms - (68c414b) - Billie Thompson
+#### Features
+- Add a shell check option - (c5c8498) - Billie Thompson
+
+- - -
+
 ## v0.10.1 - 2024-08-25
 #### Bug Fixes
 - minimise the amount of mutation testing - (9407d70) - Billie Thompson
