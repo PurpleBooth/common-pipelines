@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.11.1 - 2024-08-26
+#### Bug Fixes
+- Ignore push to docker registry - (2a15043) - Billie Thompson
+
+- - -
+
 ## v0.11.0 - 2024-08-26
 #### Continuous Integration
 - add mutants terms - (68c414b) - Billie Thompson
