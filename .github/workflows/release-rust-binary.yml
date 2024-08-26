@@ -139,7 +139,7 @@ jobs:
         pattern: bins-*
       name: Retrieve assets
     - name: Attest binaries
-      uses: actions/attest-build-provenance@v1
+      uses: actions/attest-build-provenance@v1.4.2
       with:
         subject-path: bins/**/*
     - name: Sign binaries
