@@ -69,12 +69,6 @@ jobs:
       - name: Attest
         uses: actions/attest-build-provenance@v1
         with:
-          subject-name: ${{ steps.docker.outputs.repository }}:v${{ inputs.current_version }}
-          subject-digest: ${{ steps.build-and-push.outputs.digest }}
-          push-to-registry: true
-      - name: Attest
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ${{ steps.docker.outputs.repository }}:latest
+          subject-name: ${{ steps.docker.outputs.repository }}
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
           push-to-registry: true
