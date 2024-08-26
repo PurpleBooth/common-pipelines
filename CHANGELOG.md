@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.11.3 - 2024-08-26
+#### Bug Fixes
+- correct attestation to not include image name - (9afefa5) - Billie Thompson
+
+- - -
+
 ## v0.11.2 - 2024-08-26
 #### Bug Fixes
 - Add prefix v back to tag - (e671c49) - Billie Thompson
