@@ -4,10 +4,14 @@ on:
     - main
 
 jobs:
+  lint-pipeline:
+    uses: armakuni/github-actions/.github/workflows/lint-pipeline.yml@cee3c433194a2e9ba4566d3423e4454f36fb97d0 # v0.19.3
 
 
   release:
     if: github.ref == 'refs/heads/main'
+    needs:
+     - lint-pipeline
     outputs:
       version_bump: ${{ steps.current_version.outputs.current_version != steps.previous_version.outputs.previous_version }}
       current_version: ${{ steps.current_version.outputs.current_version }}
