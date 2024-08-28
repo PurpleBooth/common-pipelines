@@ -233,11 +233,11 @@ jobs:
           if [ -f "nfpm.yaml" ] ; then
             cargo build --release
 
-            cd release
-            nfpm pkg --packager archlinux --config ./../nfpm.yaml --target /tmp/
-            nfpm pkg --packager rpm --config ./../nfpm.yaml --target /tmp/
-            nfpm pkg --packager deb --config ./../nfpm.yaml --target /tmp/
-            nfpm pkg --packager apk --config ./../nfpm.yaml --target /tmp/
+            cd target/release
+            nfpm pkg --packager archlinux --config ./../../nfpm.yaml --target /tmp/
+            nfpm pkg --packager rpm --config ./../../nfpm.yaml --target /tmp/
+            nfpm pkg --packager deb --config ./../../nfpm.yaml --target /tmp/
+            nfpm pkg --packager apk --config ./../../nfpm.yaml --target /tmp/
           fi
 
 
