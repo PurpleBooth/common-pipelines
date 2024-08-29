@@ -114,6 +114,9 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+      VER: ${{ inputs.current_version }}
     steps:
       - uses: actions/checkout@v4.1.7
         name: Checkout the repository
