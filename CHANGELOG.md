@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.12.2 - 2024-08-29
+#### Bug Fixes
+- Reduce spacing - (6883bec) - Billie Thompson
+#### Continuous Integration
+- Move hash generation to where it won't be overwritten - (596acf8) - Billie Thompson
+
+- - -
+
 ## v0.12.1 - 2024-08-29
 #### Bug Fixes
 - Add annotaions - (138da9c) - Billie Thompson
