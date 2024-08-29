@@ -142,15 +142,25 @@ jobs:
       uses: actions/attest-build-provenance@v1.4.2
       with:
         subject-path: bins/**/*
-    - name: Sign binaries
+    - name: Add hashes to release
       run: |
-        cd bins
-        for file in *; do
-          if [[ -f "$file" ]]; then
-            sha256sum "$file" > "$file.sha256"
-            md5sum "$file" > "$file.md5"
-          fi
-        done
+        {
+          echo ""
+          echo ""
+          echo "## Binary Hashes"
+          echo ""
+          (
+            cd bins
+            for file in *; do
+              if [[ -f "$file" ]]; then
+                echo -n " * "
+                sha256sum "$file"
+                echo -n " * "
+                md5sum "$file"
+              fi
+            done
+          )
+        } >> CHANGELOG.md
     - uses: cargo-bins/cargo-binstall@main
       name: Install cargo binstall
     - shell: bash
