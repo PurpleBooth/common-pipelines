@@ -142,12 +142,20 @@ jobs:
       uses: actions/attest-build-provenance@v1.4.2
       with:
         subject-path: bins/**/*
+    - uses: cargo-bins/cargo-binstall@main
+      name: Install cargo binstall
+    - shell: bash
+      run: cargo binstall --no-confirm --locked cocogitto
+    - run: cog changelog --at "$TAG_V" > CHANGELOG.md
+      shell: bash
+      env:
+        TAG_V: v${{ inputs.current_version }}
     - name: Add hashes to release
       run: |
         {
           echo ""
           echo ""
-          echo "## Binary Hashes"
+          echo "## Hashes"
           echo ""
           (
             cd bins
@@ -159,14 +167,6 @@ jobs:
             done
           )
         } >> CHANGELOG.md
-    - uses: cargo-bins/cargo-binstall@main
-      name: Install cargo binstall
-    - shell: bash
-      run: cargo binstall --no-confirm --locked cocogitto
-    - run: cog changelog --at "$TAG_V" > CHANGELOG.md
-      shell: bash
-      env:
-        TAG_V: v${{ inputs.current_version }}
     - env:
         GITHUB_TOKEN: ${{ github.token }}
       id: create_release
