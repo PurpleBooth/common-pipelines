@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.12.1 - 2024-08-29
+#### Bug Fixes
+- Add annotaions - (138da9c) - Billie Thompson
+#### Continuous Integration
+- Remove md5s - (5d20202) - Billie Thompson
+
+- - -
+
 ## v0.12.0 - 2024-08-29
 #### Continuous Integration
 - add correct rust check - (a5cbae6) - Billie Thompson
