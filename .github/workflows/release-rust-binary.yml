@@ -181,6 +181,8 @@ jobs:
             ARGE="$1"
             PACKS="$2"
             rustup target add "$ARGE"
+          
+            cargo clean
             cargo build --release --target="$ARGE"
           
             (
