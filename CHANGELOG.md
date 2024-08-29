@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.12.6 - 2024-08-29
+#### Bug Fixes
+- use oci ouput - (6e39920) - Billie Thompson
+
+- - -
+
 ## v0.12.5 - 2024-08-29
 #### Bug Fixes
 - Cache docker image build - (561d72b) - Billie Thompson
