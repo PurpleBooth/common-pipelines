@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.12.0 - 2024-08-29
+#### Continuous Integration
+- add correct rust check - (a5cbae6) - Billie Thompson
+- change working directory nfpm - (73d745b) - Billie Thompson
+- Add linter - (ca72569) - Billie Thompson
+- add nfpm - (50f8aa2) - Billie Thompson
+#### Features
+- Move shas to notes - (74cbf9f) - Billie Thompson
+#### Tests
+- for shch - (0c8c9e0) - Billie Thompson
+
+- - -
+
 ## v0.11.3 - 2024-08-26
 #### Bug Fixes
 - correct attestation to not include image name - (9afefa5) - Billie Thompson
