@@ -32,79 +32,79 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     steps:
-    - run: ${{ matrix.install }}
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      name: Install additional dependencies
-    - uses: actions/checkout@v4.1.7
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      name: Checkout the repository
-      with:
-        ref: v${{ inputs.current_version }}
-    - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-      name: Setup Cache
-      with:
-        path: |
-          .cache
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: dtolnay/rust-toolchain@master
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      name: Install rust toolchain
-      with:
-        toolchain: stable
-    - run: cargo build --release
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      name: Build release version
-    - id: get_repository_name
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      name: Calculate repository name
-      run: echo REPOSITORY_NAME="$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")"  >> "$GITHUB_OUTPUT"
-      shell: bash
-    - name: Move binary to upload location
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      env:
-        TARGET: ${{ matrix.target }}
-        EXTENSION: ${{ matrix.suffix }}
-        REPOSITORY_NAME: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}
-      run: mv "./target/release/$REPOSITORY_NAME$EXTENSION" "./$REPOSITORY_NAME-$TARGET$EXTENSION"
-      shell: bash
-    - uses: actions/upload-artifact@v4
-      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
-        == true )
-      name: Store built binary version
-      with:
-        name: bins-${{ matrix.target }}
-        path: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-${{ matrix.target }}${{ matrix.suffix }}
+      - run: ${{ matrix.install }}
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        name: Install additional dependencies
+      - uses: actions/checkout@v4.1.7
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
+        name: Setup Cache
+        with:
+          path: |
+            .cache
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: dtolnay/rust-toolchain@master
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+          == true )
+        name: Install rust toolchain
+        with:
+          toolchain: stable
+      - run: cargo build --release
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+          == true )
+        name: Build release version
+      - id: get_repository_name
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+          == true )
+        name: Calculate repository name
+        run: echo REPOSITORY_NAME="$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")"  >> "$GITHUB_OUTPUT"
+        shell: bash
+      - name: Move binary to upload location
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+          == true )
+        env:
+          TARGET: ${{ matrix.target }}
+          EXTENSION: ${{ matrix.suffix }}
+          REPOSITORY_NAME: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}
+        run: mv "./target/release/$REPOSITORY_NAME$EXTENSION" "./$REPOSITORY_NAME-$TARGET$EXTENSION"
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows
+          == true )
+        name: Store built binary version
+        with:
+          name: bins-${{ matrix.target }}
+          path: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-${{ matrix.target }}${{ matrix.suffix }}
     strategy:
       matrix:
         include:
-        - os: macos-latest
-          suffix: ''
-          target: aarch64-apple-darwin
-          install: ''
-        - os: macos-latest
-          suffix: ''
-          target: x86_64-apple-darwin
-          install: ''
-        - os: ubuntu-latest
-          suffix: ''
-          target: x86_64-unknown-linux-gnu
-          install: ''
-        - os: windows-latest
-          suffix: .exe
-          target: x86_64-pc-windows-msvc
-          install: ''
+          - os: macos-latest
+            suffix: ''
+            target: aarch64-apple-darwin
+            install: ''
+          - os: macos-latest
+            suffix: ''
+            target: x86_64-apple-darwin
+            install: ''
+          - os: ubuntu-latest
+            suffix: ''
+            target: x86_64-unknown-linux-gnu
+            install: ''
+          - os: windows-latest
+            suffix: .exe
+            target: x86_64-pc-windows-msvc
+            install: ''
 
   github-release:
     permissions:
@@ -112,97 +112,147 @@ jobs:
       attestations: write
       contents: write
     needs:
-    - build
+      - build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.1.7
-      name: Checkout the repository
-      with:
-        ref: v${{ inputs.current_version }}
-        fetch-depth: 0
-    - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-      name: Setup Cache
-      with:
-        path: |
-          .cache
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: anchore/sbom-action@v0
-    - uses: actions/download-artifact@v4
-      with:
-        merge-multiple: true
-        path: bins
-        pattern: bins-*
-      name: Retrieve assets
-    - name: Attest binaries
-      uses: actions/attest-build-provenance@v1.4.2
-      with:
-        subject-path: bins/**/*
-    - uses: cargo-bins/cargo-binstall@main
-      name: Install cargo binstall
-    - shell: bash
-      run: cargo binstall --no-confirm --locked cocogitto
-    - run: cog changelog --at "$TAG_V" > CHANGELOG.md
-      shell: bash
-      env:
-        TAG_V: v${{ inputs.current_version }}
-    - name: Add hashes to release
-      run: |
-        {
-          echo ""
-          echo ""
-          echo "## Hashes"
-          echo ""
-          (
-            cd bins
-            for file in *; do
-              if [[ -f "$file" ]]; then
-                echo " * $( sha256sum "$file" )"
-              fi
-            done
-          )
-        } >> CHANGELOG.md
-    - env:
-        GITHUB_TOKEN: ${{ github.token }}
-      id: create_release
-      name: Create github release
-      uses: ncipollo/release-action@v1.14.0
-      with:
-        allowUpdates: true
-        token: ${{ github.token }}
-        bodyFile: CHANGELOG.md
-        name: Release v${{ inputs.current_version }}
-        tag: v${{ inputs.current_version }}
-        artifacts: ./bins/*
+      - uses: actions/checkout@v4.1.7
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+          fetch-depth: 0
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Setup Cache
+        with:
+          path: |
+            .cache
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: anchore/sbom-action@v0
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: bins
+          pattern: bins-*
+        name: Retrieve assets
+      - uses: cargo-bins/cargo-binstall@main
+        name: Install cargo binstall
+      - shell: bash
+        run: cargo binstall --no-confirm --locked cocogitto
+      - run: cog changelog --at "$TAG_V" > CHANGELOG.md
+        shell: bash
+        env:
+          TAG_V: v${{ inputs.current_version }}
+      - run: echo "result=$(test -f nfpm.yaml && echo "" || echo "skip")" >> "$GITHUB_OUTPUT"
+        id: should_skip
+      - run: |
+          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
+          sudo apt update
+          sudo apt install -y nfpm gcc-aarch64-linux-gnu
+        if: steps.should_skip.outputs.result != 'skip'
+      - shell: bash
+        if: steps.should_skip.outputs.result != 'skip'
+        run: |
+          function rust_to_goarch() {
+              local rust_triple="$1"
+              local arch
+              arch=$(echo "$rust_triple" | cut -d '-' -f 1)
+              local goarch=""
+          
+              case "$arch" in
+              "x86_64") goarch="amd64" ;;
+              "i686") goarch="386" ;;
+              "arm") goarch="arm" ;;
+              "aarch64") goarch="arm64" ;;
+              # Add more mappings as needed
+              *)
+              echo "Unsupported architecture in Rust target triple: $arch"
+              return 1
+              ;;
+              esac
+          
+              echo "$goarch"
+          }
+          
+          function build_for() {
+            ARGE="$1"
+            PACKS="$2"
+            rustup target add "$ARGE"
+            cargo build --release --target="$ARGE"
+          
+            (
+              cd "./target/$ARGE/release"
+              GOARCH="$(rust_to_goarch "$ARGE")" nfpm pkg --packager archlinux --config="../../../nfpm.yaml" --target="$PACKS"
+              GOARCH="$(rust_to_goarch "$ARGE")" nfpm pkg --packager rpm --config="../../../nfpm.yaml" --target="$PACKS"
+              GOARCH="$(rust_to_goarch "$ARGE")" nfpm pkg --packager apk --config="../../../nfpm.yaml" --target="$PACKS"
+              GOARCH="$(rust_to_goarch "$ARGE")" nfpm pkg --packager deb --config="../../../nfpm.yaml" --target="$PACKS"
+            )
+          }
+          
+          EMPD="$PWD/bins"
+          mkdir -p "$PWD/bins"
+          build_for aarch64-unknown-linux-gnu "$EMPD"
+          build_for x86_64-unknown-linux-gnu "$EMPD"
+      - name: Add hashes to release
+        run: |
+          {
+            echo ""
+            echo ""
+            echo "## Hashes"
+            echo ""
+            (
+              cd bins
+              for file in *; do
+                if [[ -f "$file" ]]; then
+                  echo " * $( sha256sum "$file" )"
+                fi
+              done
+            )
+          } >> CHANGELOG.md
+      - name: Attest binaries
+        uses: actions/attest-build-provenance@v1.4.2
+        with:
+          subject-path: bins/**/*
+      - env:
+          GITHUB_TOKEN: ${{ github.token }}
+        id: create_release
+        name: Create github release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          token: ${{ github.token }}
+          bodyFile: CHANGELOG.md
+          name: Release v${{ inputs.current_version }}
+          tag: v${{ inputs.current_version }}
+          artifacts: ./bins/*
   generate-formula:
     name: Generate Homebrew Formula
     runs-on: ubuntu-latest
     steps:
-    - uses: PurpleBooth/generate-formula-action@v0.1.14
-      name: Create PR for formula
-      with:
-        current_version: ${{ inputs.current_version }}
-        previous_version: ${{ inputs.previous_version }}
-        committer_token: ${{ secrets.committer_token }}
-        gpg_private_key: ${{ secrets.gpg_private_key }}
-        gpg_passphrase: ${{ secrets.gpg_passphrase }}
+      - uses: PurpleBooth/generate-formula-action@v0.1.14
+        name: Create PR for formula
+        with:
+          current_version: ${{ inputs.current_version }}
+          previous_version: ${{ inputs.previous_version }}
+          committer_token: ${{ secrets.committer_token }}
+          gpg_private_key: ${{ secrets.gpg_private_key }}
+          gpg_passphrase: ${{ secrets.gpg_passphrase }}
 
   cargo-publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.1.7
-      name: Checkout the repository
-      with:
-        ref: v${{ inputs.current_version }}
-    - name: Generate release
-      run: |
-        if [ -n "$CARGO_TOKEN" ] ; then
-          cargo login "$CARGO_TOKEN"
-          cargo publish
-        fi
-      env:
-        CARGO_TOKEN: ${{ secrets.cargo_token }}
+      - uses: actions/checkout@v4.1.7
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+      - name: Generate release
+        run: |
+          if [ -n "$CARGO_TOKEN" ] ; then
+            cargo login "$CARGO_TOKEN"
+            cargo publish
+          fi
+        env:
+          CARGO_TOKEN: ${{ secrets.cargo_token }}
