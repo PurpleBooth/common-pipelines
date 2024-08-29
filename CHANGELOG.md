@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.12.3 - 2024-08-29
+#### Bug Fixes
+- add a cargo clean - (2827dd0) - Billie Thompson
+#### Continuous Integration
+- Add nfpm release supporttttttttt - (77f10a1) - Billie Thompson
+
+- - -
+
 ## v0.12.2 - 2024-08-29
 #### Bug Fixes
 - Reduce spacing - (6883bec) - Billie Thompson
