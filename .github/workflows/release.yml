@@ -59,7 +59,7 @@ jobs:
       with:
         ref: v${{  needs.release.outputs.current_version }}
         fetch-depth: 0
-    - uses: PurpleBooth/changelog-action@v0.3.3
+    - uses: PurpleBooth/changelog-action@619c4b782e4d2791e527361acdad0539b4e500d3 # v0.3.4
       name: Generate the changelog
       with:
         args: -v v${{ needs.release.outputs.previous_version }}..v${{ needs.release.outputs.current_version }}
