@@ -46,6 +46,11 @@ jobs:
         with:
           images: ${{ steps.docker.outputs.repository }}
           tags: |
+            type=edge,branch=main
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
             type=raw,value=latest
             type=semver,pattern={{version}},value=v${{ inputs.current_version }},prefix=v
             type=semver,pattern={{version}},value=v${{ inputs.current_version }}
@@ -73,5 +78,3 @@ jobs:
           subject-name: ${{ steps.docker.outputs.repository }}
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
           push-to-registry: true
-
-
