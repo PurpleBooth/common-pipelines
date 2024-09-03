@@ -15,13 +15,6 @@ jobs:
         uses: docker/setup-qemu-action@v3.2.0
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.6.1
-      - name: Login to GitHub Container Registry
-        if: inputs.push
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
       - run: echo "repository=$( echo "ghcr.io/$REPOSITORY" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
         id: docker
         name: Turn repository name into docker registry name
@@ -44,7 +37,6 @@ jobs:
       - name: Bake (without version)
         uses: docker/bake-action@v4
         with:
-          push: ${{ inputs.push }}
           tags: ${{ steps.meta-without-version.outputs.tags }}
           files: |
             ./docker-bake.hcl
