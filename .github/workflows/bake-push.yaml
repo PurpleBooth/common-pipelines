@@ -37,7 +37,7 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
       - name: Extract versioned metadata (tags, labels) for Docker
-        if: inputs.current_version != ""
+        if: inputs.current_version != ''
         id: meta-with-version
         uses: docker/metadata-action@v5.5.1
         with:
@@ -53,7 +53,7 @@ jobs:
             type=semver,pattern={{version}},value=v${{ inputs.current_version }}
             type=sha
       - name: Extract metadata (tags, labels) for Docker
-        if: inputs.current_version == ""
+        if: inputs.current_version == ''
         id: meta-without-version
         uses: docker/metadata-action@v5.5.1
         with:
@@ -67,7 +67,7 @@ jobs:
             type=raw,value=latest
             type=sha
       - name: Bake (with version)
-        if: inputs.current_version != ""
+        if: inputs.current_version != ''
         uses: docker/bake-action@v4
         with:
           push: true
@@ -77,7 +77,7 @@ jobs:
             cwd://${{ steps.meta-with-version.outputs.bake-file }}
           targets: docker
       - name: Bake (without version)
-        if: inputs.current_version == ""
+        if: inputs.current_version == ''
         uses: docker/bake-action@v4
         with:
           push: true
