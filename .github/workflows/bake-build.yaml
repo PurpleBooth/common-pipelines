@@ -36,8 +36,8 @@ jobs:
         uses: docker/bake-action@v4
         with:
           set: |
-            docker.cache-from: [type=gha]
-            docker.cache-to: [type=gha,mode=max]
+            docker.cache-from=type=gha
+            docker.cache-to=type=gha,mode=max
           files: |
             ./docker-bake.hcl
             ${{ steps.meta.outputs.bake-file-tags }}
