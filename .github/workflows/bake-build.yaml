@@ -21,7 +21,6 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
       - name: Extract metadata (tags, labels) for Docker
-        if: inputs.current_version == ""
         id: meta-without-version
         uses: docker/metadata-action@v5.5.1
         with:
