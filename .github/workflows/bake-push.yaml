@@ -41,6 +41,7 @@ jobs:
         id: meta-with-version
         uses: docker/metadata-action@v5.5.1
         with:
+          bake-target: docker
           images: ${{ steps.docker.outputs.repository }}
           tags: |
             type=edge,branch=main
@@ -57,6 +58,7 @@ jobs:
         id: meta-without-version
         uses: docker/metadata-action@v5.5.1
         with:
+          bake-target: docker
           images: ${{ steps.docker.outputs.repository }}
           tags: |
             type=edge,branch=main
