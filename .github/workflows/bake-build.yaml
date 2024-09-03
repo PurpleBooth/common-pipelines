@@ -41,5 +41,6 @@ jobs:
           files: |
             ./docker-bake.hcl
             ${{ steps.meta.outputs.bake-file-tags }}
-            ${{ steps.meta.outputs.bake-file }}
+            ${{ steps.meta.outputs.bake-file-annotations }}
+            ${{ steps.meta.outputs.bake-file-labels }}
           targets: docker          
