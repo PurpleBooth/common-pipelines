@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.14.0 - 2024-09-03
+#### Bug Fixes
+- Remove error - (5fefa1f) - Billie Thompson
+- Remove syn - (d47f032) - Billie Thompson
+- Correct syn - (dbd1232) - Billie Thompson
+- Remove push - (1caa657) - Billie Thompson
+#### Features
+- Add bake push - (eb43015) - Billie Thompson
+- Add bake build - (970b517) - Billie Thompson
+
+- - -
+
 ## v0.13.0 - 2024-09-03
 #### Continuous Integration
 - Remove load - (45d02dd) - Billie Thompson
