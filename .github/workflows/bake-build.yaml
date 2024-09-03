@@ -35,6 +35,8 @@ jobs:
       - name: Bake (without version)
         uses: docker/bake-action@v4
         with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           files: |
             ./docker-bake.hcl
             cwd://${{ steps.meta-without-version.outputs.bake-file }}
