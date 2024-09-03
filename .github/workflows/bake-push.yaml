@@ -83,8 +83,8 @@ jobs:
         uses: docker/bake-action@v4
         with:
           set: |
-            docker.cache-from: type=gha
-            docker.cache-to: type=gha,mode=max
+            docker.cache-from=type=gha
+            docker.cache-to=type=gha,mode=max
           push: true
           files: |
             ./docker-bake.hcl
