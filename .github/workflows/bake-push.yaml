@@ -76,6 +76,7 @@ jobs:
           push: true
           files: |
             ./docker-bake.hcl
+            ${{ steps.meta.outputs.bake-file-tags }}
             cwd://${{ steps.meta-with-version.outputs.bake-file }}
           targets: docker
       - name: Bake (without version)
@@ -88,5 +89,6 @@ jobs:
           push: true
           files: |
             ./docker-bake.hcl
+            ${{ steps.meta.outputs.bake-file-tags }}
             cwd://${{ steps.meta-without-version.outputs.bake-file }}
           targets: docker          
