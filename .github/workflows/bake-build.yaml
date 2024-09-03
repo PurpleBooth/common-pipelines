@@ -20,7 +20,7 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
       - name: Extract metadata (tags, labels) for Docker
-        id: meta-without-version
+        id: meta
         uses: docker/metadata-action@v5.5.1
         with:
           images: ${{ steps.docker.outputs.repository }}
@@ -41,5 +41,5 @@ jobs:
           files: |
             ./docker-bake.hcl
             ${{ steps.meta.outputs.bake-file-tags }}
-            ${{ steps.meta-without-version.outputs.bake-file }}
+            ${{ steps.meta.outputs.bake-file }}
           targets: docker          
