@@ -81,8 +81,9 @@ jobs:
         if: inputs.current_version == ''
         uses: docker/bake-action@v4
         with:
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          set: |
+            docker.cache-from: type=gha
+            docker.cache-to: type=gha,mode=max
           push: true
           files: |
             ./docker-bake.hcl
