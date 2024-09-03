@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.13.0 - 2024-09-03
+#### Continuous Integration
+- Remove load - (45d02dd) - Billie Thompson
+#### Features
+- Add a bake step - (b4005c0) - Billie Thompson
+#### Miscellaneous Chores
+- **(deps)** update taiki-e/install-action digest to f2b65a3 - (6087a7e) - renovate[bot]
+- **(deps)** update purplebooth/changelog-action action to v0.3.4 - (38d7999) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 1105389 - (ea0b56f) - renovate[bot]
+- More utility tags - (7e298cf) - Billie Thompson
+
+- - -
+
 ## v0.12.6 - 2024-08-29
 #### Bug Fixes
 - use oci ouput - (6e39920) - Billie Thompson
