@@ -77,7 +77,8 @@ jobs:
           files: |
             ./docker-bake.hcl
             ${{ steps.meta-with-version.outputs.bake-file-tags }}
-            ${{ steps.meta-with-version.outputs.bake-file }}
+            ${{ steps.meta-with-version.outputs.bake-file-annotations }}
+            ${{ steps.meta-with-version.outputs.bake-file-labels }}
           targets: docker
       - name: Bake (without version)
         if: inputs.current_version == ''
@@ -90,5 +91,6 @@ jobs:
           files: |
             ./docker-bake.hcl
             ${{ steps.meta-without-version.outputs.bake-file-tags }}
-            ${{ steps.meta-without-version.outputs.bake-file }}
+            ${{ steps.meta-without-version.outputs.bake-file-annotations }}
+            ${{ steps.meta-without-version.outputs.bake-file-labels }}
           targets: docker          
