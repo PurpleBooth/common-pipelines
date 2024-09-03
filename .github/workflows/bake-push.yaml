@@ -1,0 +1,88 @@
+on:
+  workflow_call:
+    inputs:
+      current_version:
+        description: The current version
+        type: string
+        required: false
+        default: ""
+jobs:
+  docker-push:
+    permissions:
+      id-token: "write"
+      packages: "write"
+      contents: read
+      attestations: "write"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+        with:
+          lfs: true
+          ref: v${{ inputs.current_version }}
+          submodules: recursive
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3.2.0
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.6.1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - run: echo "repository=$( echo "ghcr.io/$REPOSITORY" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+        id: docker
+        name: Turn repository name into docker registry name
+        env:
+          REPOSITORY: ${{ github.repository }}
+      - name: Extract versioned metadata (tags, labels) for Docker
+        if: inputs.current_version != ""
+        id: meta-with-version
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ${{ steps.docker.outputs.repository }}
+          tags: |
+            type=edge,branch=main
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=raw,value=latest
+            type=semver,pattern={{version}},value=v${{ inputs.current_version }},prefix=v
+            type=semver,pattern={{version}},value=v${{ inputs.current_version }}
+            type=sha
+      - name: Extract metadata (tags, labels) for Docker
+        if: inputs.current_version == ""
+        id: meta-without-version
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ${{ steps.docker.outputs.repository }}
+          tags: |
+            type=edge,branch=main
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=raw,value=latest
+            type=sha
+      - name: Bake (with version)
+        if: inputs.current_version != ""
+        uses: docker/bake-action@v4
+        with:
+          push: true
+          tags: ${{ steps.meta-with-version.outputs.tags }}
+          files: |
+            ./docker-bake.hcl
+            cwd://${{ steps.meta-with-version.outputs.bake-file }}
+          targets: docker
+      - name: Bake (without version)
+        if: inputs.current_version == ""
+        uses: docker/bake-action@v4
+        with:
+          push: true
+          tags: ${{ steps.meta-without-version.outputs.tags }}
+          files: |
+            ./docker-bake.hcl
+            cwd://${{ steps.meta-without-version.outputs.bake-file }}
+          targets: docker          
