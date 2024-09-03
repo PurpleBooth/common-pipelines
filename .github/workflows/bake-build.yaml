@@ -23,6 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
+          bake-target: docker
           images: ${{ steps.docker.outputs.repository }}
           tags: |
             type=edge,branch=main
