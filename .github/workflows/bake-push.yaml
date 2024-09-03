@@ -71,7 +71,6 @@ jobs:
         uses: docker/bake-action@v4
         with:
           push: true
-          tags: ${{ steps.meta-with-version.outputs.tags }}
           files: |
             ./docker-bake.hcl
             cwd://${{ steps.meta-with-version.outputs.bake-file }}
@@ -81,7 +80,6 @@ jobs:
         uses: docker/bake-action@v4
         with:
           push: true
-          tags: ${{ steps.meta-without-version.outputs.tags }}
           files: |
             ./docker-bake.hcl
             cwd://${{ steps.meta-without-version.outputs.bake-file }}
