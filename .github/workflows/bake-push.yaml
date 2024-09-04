@@ -70,7 +70,7 @@ jobs:
             type=sha
       - name: Bake (with version)
         if: inputs.current_version != ''
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@76cc8060bdff6d632a465001e4cf300684c5472c # v5
         with:
           set: |
             docker.cache-from=type=gha
@@ -85,7 +85,7 @@ jobs:
           targets: docker
       - name: Bake (without version)
         if: inputs.current_version == ''
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@76cc8060bdff6d632a465001e4cf300684c5472c # v5
         with:
           set: |
             docker.cache-from=type=gha
