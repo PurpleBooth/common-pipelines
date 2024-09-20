@@ -16,10 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        if: ${{ inputs.current_version != "" }}
         uses: actions/checkout@v4.1.7
         with:
           lfs: true
           ref: v${{ inputs.current_version }}
+          submodules: recursive
+      - name: Checkout
+        if: ${{ inputs.current_version == "" }}
+        uses: actions/checkout@v4.1.7
+        with:
+          lfs: true
           submodules: recursive
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3.2.0
