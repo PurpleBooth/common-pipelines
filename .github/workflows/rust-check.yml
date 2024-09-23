@@ -259,7 +259,7 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: rustsec/audit-check@v1.4.1
+    - uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2.0.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
       name: Audit check cargo packages
@@ -287,7 +287,7 @@ jobs:
         toolchain: nightly
     - run: cargo update -Z minimal-versions
       name: Install the oldest possible versions of dependencies
-    - uses: rustsec/audit-check@v1.4.1
+    - uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2.0.0
       name: Audit check cargo packages
       with:
         token: ${{ github.token }}
