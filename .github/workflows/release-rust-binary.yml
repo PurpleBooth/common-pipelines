@@ -42,7 +42,7 @@ jobs:
         name: Checkout the repository
         with:
           ref: v${{ inputs.current_version }}
-      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
+      - uses: actions/cache@3624ceb22c1c5a301c8db4169662070a689d9ea8 # v4.1.1
         if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
         name: Setup Cache
         with:
@@ -123,7 +123,7 @@ jobs:
         with:
           ref: v${{ inputs.current_version }}
           fetch-depth: 0
-      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
+      - uses: actions/cache@3624ceb22c1c5a301c8db4169662070a689d9ea8 # v4.1.1
         name: Setup Cache
         with:
           path: |
