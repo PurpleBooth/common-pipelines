@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.15.1 - 2024-10-31
+#### Bug Fixes
+- Add bins to the bake - (8ad260c) - Billie Thompson
+#### Miscellaneous Chores
+- add target and .idea to the ignores - (c547282) - Billie Thompson
+
+- - -
+
 ## v0.15.0 - 2024-10-31
 #### Continuous Integration
 - remove latest from edge - (44707e9) - Billie Thompson
