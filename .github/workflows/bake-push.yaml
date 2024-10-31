@@ -74,7 +74,7 @@ jobs:
             type=ref,event=tag
             type=ref,event=pr
             type=sha
-      - name: Bake (with version)
+      - name: Bake Docker (with version)
         if: inputs.current_version != ''
         uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
         with:
@@ -89,7 +89,7 @@ jobs:
             ${{ steps.meta-with-version.outputs.bake-file-annotations }}
             ${{ steps.meta-with-version.outputs.bake-file-labels }}
           targets: docker
-      - name: Bake (without version)
+      - name: Bake Docker (without version)
         if: inputs.current_version == ''
         uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
         with:
@@ -103,4 +103,45 @@ jobs:
             ${{ steps.meta-without-version.outputs.bake-file-tags }}
             ${{ steps.meta-without-version.outputs.bake-file-annotations }}
             ${{ steps.meta-without-version.outputs.bake-file-labels }}
-          targets: docker          
+          targets: docker
+      - name: Bake Bins (with version)
+        if: inputs.current_version != ''
+        uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
+        with:
+          set: |
+            docker.cache-from=type=gha
+            docker.cache-to=type=gha,mode=max
+            docker.args.VER=${{ inputs.current_version }}
+          push: true
+          files: |
+            ./docker-bake.hcl
+            ${{ steps.meta-with-version.outputs.bake-file-tags }}
+            ${{ steps.meta-with-version.outputs.bake-file-annotations }}
+            ${{ steps.meta-with-version.outputs.bake-file-labels }}
+          targets: bins
+      - name: Bake Bins (without version)
+        if: inputs.current_version == ''
+        uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
+        with:
+          set: |
+            docker.cache-from=type=gha
+            docker.cache-to=type=gha,mode=max
+            docker.args.VER=${{ inputs.current_version }}
+          push: true
+          files: |
+            ./docker-bake.hcl
+            ${{ steps.meta-without-version.outputs.bake-file-tags }}
+            ${{ steps.meta-without-version.outputs.bake-file-annotations }}
+            ${{ steps.meta-without-version.outputs.bake-file-labels }}
+          targets: bins
+      - shell: bash
+        run: |
+              for I in target/bins/*/*/* ; do
+                mv -v "$I" "target/bins/$(echo "$I" | cut -d '/' -f 3- | tr "/" "-")"
+              done
+              find target/bins/ -type d -empty -delete
+      - uses: actions/upload-artifact@v4
+        name: Upload binaries
+        with:
+          name: built-bins
+          path: target/bins/
