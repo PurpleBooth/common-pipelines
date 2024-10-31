@@ -33,7 +33,7 @@ jobs:
             type=ref,event=pr
             type=raw,value=latest
             type=sha
-      - name: Bake (without version)
+      - name: Bake Docker (without version)
         uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
         with:
           set: |
