@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.15.0 - 2024-10-31
+#### Continuous Integration
+- remove latest from edge - (44707e9) - Billie Thompson
+#### Features
+- Build bins from bake too - (c3595e4) - Billie Thompson
+#### Miscellaneous Chores
+- **(deps)** update taiki-e/install-action digest to a533731 - (9ce6772) - renovate[bot]
+- **(deps)** update actions/checkout action to v4.2.2 - (340d263) - renovate[bot]
+- **(deps)** update actions/cache action to v4.1.2 - (886f5b3) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 939f4af - (d0d3ca4) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 42f4ec8 - (714a13e) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 5ffe29a - (4690f8c) - renovate[bot]
+- **(deps)** update actions/cache action to v4.1.1 - (ba251e4) - renovate[bot]
+- **(deps)** update actions/checkout action to v4.2.1 - (96f6b22) - renovate[bot]
+- **(deps)** update actions/cache action to v4.1.0 - (ee38b3e) - renovate[bot]
+- **(deps)** update docker/setup-buildx-action action to v3.7.1 - (3e6f5d1) - renovate[bot]
+- **(deps)** update docker/bake-action digest to 2e3d19b - (2a9180d) - renovate[bot]
+- **(deps)** update docker/build-push-action action to v6.9.0 - (9a1ffca) - renovate[bot]
+- **(deps)** update docker/bake-action digest to 64673bc - (cda35ea) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 9bef7e9 - (2c18bdc) - renovate[bot]
+- **(deps)** update docker/build-push-action action to v6.8.0 - (f81621a) - renovate[bot]
+- **(deps)** update docker/bake-action digest to e626c73 - (750dc7e) - renovate[bot]
+- **(deps)** update actions/checkout action to v4.2.0 - (0c6e27e) - renovate[bot]
+- **(deps)** update rustsec/audit-check action to v2 - (0d29bf8) - renovate[bot]
+- **(deps)** update taiki-e/install-action digest to 7348990 - (56774cc) - renovate[bot]
+
+- - -
+
 ## v0.14.1 - 2024-09-20
 #### Bug Fixes
 - Do nottt - (bc3d087) - Billie Thompson
