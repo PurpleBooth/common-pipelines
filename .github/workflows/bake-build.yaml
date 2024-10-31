@@ -45,3 +45,15 @@ jobs:
             ${{ steps.meta.outputs.bake-file-annotations }}
             ${{ steps.meta.outputs.bake-file-labels }}
           targets: docker          
+      - name: Bake Bins (without version)
+        uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
+        with:
+          set: |
+            docker.cache-from=type=gha
+            docker.cache-to=type=gha,mode=max
+          files: |
+            ./docker-bake.hcl
+            ${{ steps.meta.outputs.bake-file-tags }}
+            ${{ steps.meta.outputs.bake-file-annotations }}
+            ${{ steps.meta.outputs.bake-file-labels }}
+          targets: bins
