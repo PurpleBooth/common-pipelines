@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.2 - 2024-11-01
+#### Bug Fixes
+- Apply to all bins - (ac8e7d8) - Billie Thompson
+
+- - -
+
 ## v0.16.1 - 2024-11-01
 #### Bug Fixes
 - Set the bins version - (11ea4ea) - Billie Thompson
