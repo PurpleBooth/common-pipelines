@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.4 - 2024-11-01
+#### Bug Fixes
+- correct hash path - (5e9edc2) - Billie Thompson
+
+- - -
+
 ## v0.16.3 - 2024-11-01
 #### Bug Fixes
 - correct hash list - (e06eb33) - Billie Thompson
