@@ -70,7 +70,7 @@ jobs:
             echo "## Hashes"
             echo ""
             (
-              cd bins
+              cd ./bins/*/*
               for file in *; do
                 if [[ -f "$file" ]]; then
                   echo " * $( sha256sum "$file" )"
