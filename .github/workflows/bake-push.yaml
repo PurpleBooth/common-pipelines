@@ -7,7 +7,7 @@ on:
         required: false
         default: ""
 jobs:
-  docker-push:
+  bake-release-build:
     permissions:
       id-token: "write"
       packages: "write"
@@ -135,6 +135,7 @@ jobs:
             ${{ steps.meta-without-version.outputs.bake-file-labels }}
           targets: bins
       - shell: bash
+        name: "Flatten filenames"
         run: |
               for I in target/bins/*/*/* ; do
                 mv -v "$I" "target/bins/$(echo "$I" | cut -d '/' -f 3- | tr "/" "-")"
