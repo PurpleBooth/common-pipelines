@@ -93,7 +93,7 @@ jobs:
           bodyFile: CHANGELOG.md
           name: Release v${{ inputs.current_version }}
           tag: v${{ inputs.current_version }}
-          artifacts: ./bins/*
+          artifacts: ./bins/**/*
   generate-formula:
     name: Generate Homebrew Formula
     runs-on: ubuntu-latest
