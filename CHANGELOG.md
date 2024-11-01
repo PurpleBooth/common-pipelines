@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.1 - 2024-11-01
+#### Bug Fixes
+- Set the bins version - (11ea4ea) - Billie Thompson
+#### Continuous Integration
+- make the names of the steps better - (06941ff) - Billie Thompson
+- Correct bins - (f92ec8d) - Billie Thompson
+
+- - -
+
 ## v0.16.0 - 2024-11-01
 #### Features
 - add release action using bake - (4325c13) - Billie Thompson
