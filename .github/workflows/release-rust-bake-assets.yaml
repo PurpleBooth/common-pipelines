@@ -1,0 +1,124 @@
+on:
+  workflow_call:
+    inputs:
+      current_version:
+        description: The current version
+        type: string
+        required: true
+      previous_version:
+        description: The previous version
+        type: string
+        required: true
+    secrets:
+      committer_token:
+        description: Commit token to use to create PRs on the homebrew repo
+        required: true
+      gpg_private_key:
+        description: The private key to sign the git repository with
+        required: true
+      gpg_passphrase:
+        description: The passphrase for the gpg key
+        required: true
+      cargo_token:
+        description: Token to publish to crates.io
+        required: false
+
+jobs:
+  github-release:
+    permissions:
+      id-token: write
+      attestations: write
+      contents: write
+    runs-on: ubuntu-latest
+    env:
+      VER: ${{ inputs.current_version }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+          fetch-depth: 0
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+        name: Setup Cache
+        with:
+          path: |
+            .cache
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions/download-artifact@v4
+        with:
+          path: bins
+          pattern: built-bins
+        name: Retrieve assets
+      - uses: cargo-bins/cargo-binstall@main
+        name: Install cargo binstall
+      - shell: bash
+        run: cargo binstall --no-confirm --locked cocogitto
+      - run: cog changelog --at "$TAG_V" > CHANGELOG.md
+        shell: bash
+        env:
+          TAG_V: v${{ inputs.current_version }}
+      - name: Add hashes to release
+        run: |
+          {
+            echo ""
+            echo ""
+            echo "## Hashes"
+            echo ""
+            (
+              cd bins
+              for file in *; do
+                if [[ -f "$file" ]]; then
+                  echo " * $( sha256sum "$file" )"
+                fi
+              done
+            )
+          } >> CHANGELOG.md
+      - name: Attest binaries
+        uses: actions/attest-build-provenance@1c608d11d69870c2092266b3f9a6f3abbf17002c # v1.4.3
+        with:
+          subject-path: bins/**/*
+      - env:
+          GITHUB_TOKEN: ${{ github.token }}
+        id: create_release
+        name: Create github release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          token: ${{ github.token }}
+          bodyFile: CHANGELOG.md
+          name: Release v${{ inputs.current_version }}
+          tag: v${{ inputs.current_version }}
+          artifacts: ./bins/*
+  generate-formula:
+    name: Generate Homebrew Formula
+    runs-on: ubuntu-latest
+    steps:
+      - uses: PurpleBooth/generate-formula-action@v0.1.14
+        name: Create PR for formula
+        with:
+          current_version: ${{ inputs.current_version }}
+          previous_version: ${{ inputs.previous_version }}
+          committer_token: ${{ secrets.committer_token }}
+          gpg_private_key: ${{ secrets.gpg_private_key }}
+          gpg_passphrase: ${{ secrets.gpg_passphrase }}
+
+  cargo-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        name: Checkout the repository
+        with:
+          ref: v${{ inputs.current_version }}
+      - name: Generate release
+        run: |
+          if [ -n "$CARGO_TOKEN" ] ; then
+            cargo login "$CARGO_TOKEN"
+            cargo publish
+          fi
+        env:
+          CARGO_TOKEN: ${{ secrets.cargo_token }}
