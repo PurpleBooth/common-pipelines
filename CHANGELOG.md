@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.0 - 2024-11-01
+#### Features
+- add release action using bake - (4325c13) - Billie Thompson
+#### Miscellaneous Chores
+- make the name a little nicer in a ci step - (40748ae) - Billie Thompson
+
+- - -
+
 ## v0.15.1 - 2024-10-31
 #### Bug Fixes
 - Add bins to the bake - (8ad260c) - Billie Thompson
