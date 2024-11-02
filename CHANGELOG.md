@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.6 - 2024-11-02
+#### Bug Fixes
+- Add key - (1fb914b) - Billie Thompson
+
+- - -
+
 ## v0.16.5 - 2024-11-02
 #### Bug Fixes
 - Remove default for secrets - (4f0aad3) - Billie Thompson
