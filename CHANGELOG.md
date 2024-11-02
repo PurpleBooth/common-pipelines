@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.5 - 2024-11-02
+#### Bug Fixes
+- Remove default for secrets - (4f0aad3) - Billie Thompson
+- secrets to be passed via secrets - (818d8c2) - Billie Thompson
+- Add options for gpg - (f317cb1) - Billie Thompson
+
+- - -
+
 ## v0.16.3 - 2024-11-01
 #### Bug Fixes
 - correct hash list - (e06eb33) - Billie Thompson
