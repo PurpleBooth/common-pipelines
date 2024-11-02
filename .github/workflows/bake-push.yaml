@@ -10,11 +10,9 @@ on:
       gpg_private_key:
         description: The private key to sign the git repository with
         required: false
-        default: ""
       gpg_passphrase:
         description: The passphrase for the gpg key
         required: false
-        default: ""
 jobs:
   bake-release-build:
     permissions:
