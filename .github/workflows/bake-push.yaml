@@ -6,14 +6,15 @@ on:
         type: string
         required: false
         default: ""
-    gpg_private_key:
-      description: The private key to sign the git repository with
-      required: false
-      default: ""
-    gpg_passphrase:
-      description: The passphrase for the gpg key
-      required: false
-      default: ""
+    secrets:
+      gpg_private_key:
+        description: The private key to sign the git repository with
+        required: false
+        default: ""
+      gpg_passphrase:
+        description: The passphrase for the gpg key
+        required: false
+        default: ""
 jobs:
   bake-release-build:
     permissions:
@@ -116,8 +117,8 @@ jobs:
         if: inputs.current_version != ''
         uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
         env:
-          GPG_PRIVATE_KEY: ${{ inputs.gpg_private_key }}
-          GPG_PASSPHRASE: ${{ inputs.gpg_passphrase }}
+          GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
+          GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
         with:
           set: |
             docker.cache-from=type=gha
@@ -134,8 +135,8 @@ jobs:
         if: inputs.current_version == ''
         uses: docker/bake-action@2e3d19baedb14545e5d41222653874f25d5b4dfb # v5
         env:
-          GPG_PRIVATE_KEY: ${{ inputs.gpg_private_key }}
-          GPG_PASSPHRASE: ${{ inputs.gpg_passphrase }}
+          GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
+          GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
         with:
           set: |
             docker.cache-from=type=gha
