@@ -53,7 +53,7 @@ jobs:
       - name: Extract versioned metadata (tags, labels) for Docker
         if: inputs.current_version != ''
         id: meta-with-version
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # v5.6.1
         with:
           bake-target: docker
           images: ${{ steps.docker.outputs.repository }}
@@ -70,7 +70,7 @@ jobs:
       - name: Extract metadata (tags, labels) for Docker
         if: inputs.current_version == ''
         id: meta-without-version
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # v5.6.1
         with:
           bake-target: docker
           images: ${{ steps.docker.outputs.repository }}
