@@ -61,7 +61,7 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: specdown/setup-specdown-action@d922e0e08ad2f2878ca5b43e1ef79b156f3ccdc0 # v0.2.30
+    - uses: specdown/setup-specdown-action@3479a13e83a0f2f3adacfd09d88ad6d660e01aee # v0.2.32
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       name: Download Specdown
     - uses: dtolnay/rust-toolchain@stable
