@@ -34,7 +34,7 @@ jobs:
             type=raw,value=latest
             type=sha
       - name: Bake Docker (without version)
-        uses: docker/bake-action@4a9a8d494466d37134e2bfca2d3a8de8fb2681ad # v5
+        uses: docker/bake-action@76f9fa3a758507623da19f6092dc4089a7e61592 # v6
         with:
           set: |
             docker.cache-from=type=gha
@@ -46,7 +46,7 @@ jobs:
             ${{ steps.meta.outputs.bake-file-labels }}
           targets: docker          
       - name: Bake Bins (without version)
-        uses: docker/bake-action@4a9a8d494466d37134e2bfca2d3a8de8fb2681ad # v5
+        uses: docker/bake-action@76f9fa3a758507623da19f6092dc4089a7e61592 # v6
         env:
           GPG_PRIVATE_KEY: ""
           GPG_PASSPHRASE: ""
