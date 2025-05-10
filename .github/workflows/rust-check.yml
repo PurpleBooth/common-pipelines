@@ -289,6 +289,7 @@ jobs:
         if [ ! -f "Cargo.lock" ]; then
           cargo install
         fi
+      name: cargo install
     - run: cargo update -Z minimal-versions
       name: Install the oldest possible versions of dependencies
     - uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2.0.0
