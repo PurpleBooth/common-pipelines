@@ -187,7 +187,7 @@ jobs:
     - run: cargo fmt --all -- --check
       name: Check the formatting of the code
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
-    - run: cargo clippy --all-targets --all-features
+    - run: cargo +stable clippy --all-features
       name: Lint the code with clippy
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
 
