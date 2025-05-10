@@ -1,7 +1,7 @@
 [package]
 name = "sdfyrnntrwb"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 description = "test package, please ignore"
 license = "CC0-1.0"
 keywords = ["not", "published", "so", "it", "does", "not", "matter"]
