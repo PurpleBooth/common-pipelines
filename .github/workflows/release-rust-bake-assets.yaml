@@ -79,7 +79,7 @@ jobs:
             )
           } >> CHANGELOG.md
       - name: Attest binaries
-        uses: actions/attest-build-provenance@c4fbc648846ca6f503a13a2281a5e7b98aa57202 # v2.0.1
+        uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2.3.0
         with:
           subject-path: bins/**/*
       - env:
