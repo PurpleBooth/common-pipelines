@@ -132,7 +132,7 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: dtolnay/rust-toolchain@master
-      name: Setup the stable rust toolchain
+      name: Setup the nightly rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
         toolchain: nightly
