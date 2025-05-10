@@ -182,6 +182,7 @@ jobs:
           cargo build
         fi
       shell: bash
+      if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       name: Initialize cargo if needed
     - run: cargo fmt --all -- --check
       name: Check the formatting of the code
