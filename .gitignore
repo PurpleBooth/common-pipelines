@@ -1,3 +1,4 @@
 /.versio-paused
 /.idea
 /target
+.aider*
