@@ -288,9 +288,9 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: dtolnay/rust-toolchain@master
-      name: Setup the stable rust toolchain
+      name: Setup the nightly rust toolchain
       with:
-        toolchain: stable
+        toolchain: nightly
     - run: |
         if [ ! -f "Cargo.lock" ]; then
           cargo build
