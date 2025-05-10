@@ -135,7 +135,7 @@ jobs:
       name: Setup the stable rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        toolchain: stable
+        toolchain: nightly
     - run: rm Cargo.lock || true
       shell: bash
       name: Remove any existing dependency calculations
