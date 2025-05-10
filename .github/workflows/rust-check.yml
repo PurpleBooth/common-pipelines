@@ -132,7 +132,7 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: dtolnay/rust-toolchain@master
-      name: Setup the nightly rust toolchain
+      name: Setup the stable rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
         toolchain: stable
@@ -172,10 +172,10 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: dtolnay/rust-toolchain@master
-      name: Setup the nightly rust toolchain
+      name: Setup the stable rust toolchain
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
       with:
-        toolchain: nightly
+        toolchain: stable
         components: rustfmt, clippy
     - run: cargo fmt --all -- --check
       name: Check the formatting of the code
@@ -282,9 +282,9 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: dtolnay/rust-toolchain@master
-      name: Setup the nightly rust toolchain
+      name: Setup the stable rust toolchain
       with:
-        toolchain: nightly
+        toolchain: stable
     - run: cargo update -Z minimal-versions
       name: Install the oldest possible versions of dependencies
     - uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2.0.0
