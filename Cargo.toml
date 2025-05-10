@@ -1,10 +1,10 @@
 [package]
 name = "sdfyrnntrwb"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 description = "test package, please ignore"
 license = "CC0-1.0"
-keywords = ["not", "published", "so", "it", "does", "not", "matter"]
+keywords = ["not", "published"]
 categories = ["development-tools", "development-tools::cargo-plugins"]
 repository = "https://github.com/PurpleBooth/common-pipelines"
 
