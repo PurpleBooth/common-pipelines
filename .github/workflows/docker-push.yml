@@ -65,13 +65,11 @@ jobs:
           sbom: true
           provenance: mode=max
           platforms: ${{ inputs.platforms }}
-          github-token: ${{ github.token }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ steps.docker.outputs.repository }}:cache
+          cache-to: type=registry,ref=${{ steps.docker.outputs.repository }}:cache,mode=max
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
-          outputs: type=registry,oci-mediatypes=true,compression=estargz,force-compression=true
       - name: Attest
         uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2
         with:

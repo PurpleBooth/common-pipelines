@@ -50,7 +50,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
-          outputs: type=oci,dest=/tmp/docker-image-cache.tar
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
