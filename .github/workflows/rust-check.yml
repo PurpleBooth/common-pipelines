@@ -155,7 +155,7 @@ jobs:
     - name: Set up Homebrew
       id: set-up-homebrew
       if: runner.os != 'Windows'
-      uses: Homebrew/actions/setup-homebrew@master
+      uses: Homebrew/actions/setup-homebrew@082c94ee19e776205cfa8e43802917d1425e2fe7 # main
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       name: Checkout the repository
       if: runner.os != 'Windows' || ( runner.os == 'Windows' && inputs.run_on_windows == true )
