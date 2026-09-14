@@ -2,6 +2,87 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.16.7 - 2026-09-14
+#### Bug Fixes
+- (**ci**) pin Homebrew/actions/setup-homebrew to main SHA - (a9eefe0) - Billie
+#### Continuous Integration
+- Remove cache-to directive from Docker build workflow - (1d3ce15) - Billie Thompson
+- Update Docker workflow cache and remove unused outputs - (07c4440) - Billie Thompson
+- Enable registry-based cache in docker-build workflow - (403d255) - Billie Thompson (aider)
+- Update clippy command to use stable toolchain - (204fbf8) - Billie Thompson
+- add conditional execution for cargo build on Windows - (0246b52) - Billie Thompson
+- Add shell and name to cargo initialization step - (f62b0aa) - Billie Thompson
+- Specify shell as bash in rust-check workflow - (66e05e2) - Billie Thompson
+- Add cargo build step if Cargo.lock is missing in rust-check.yml - (da4366d) - Billie Thompson
+- Rename cargo install step to cargo build in rust-check.yml - (87e16af) - Billie Thompson
+- Switch to nightly rust toolchain in workflow - (31d670d) - Billie Thompson
+- Update rust toolchain to nightly in workflow - (0164de3) - Billie Thompson
+- Switch to nightly rust toolchain in CI workflow - (e2d7c35) - Billie Thompson
+- Add cargo build step if Cargo.lock is missing - (e8196a7) - Billie Thompson
+- add name to cargo install step in rust-check workflow - (4eb112f) - Billie Thompson
+- Add cargo install step if Cargo.lock is missing - (3b5eb5f) - Billie Thompson
+- Simplify clippy command in GitHub workflow - (82c4e88) - Billie Thompson
+- Switch from nightly to stable Rust toolchain in workflows - (a532697) - Billie Thompson
+- Switch rust toolchain from nightly to stable in workflow - (00ea6a5) - Billie Thompson
+#### Miscellaneous Chores
+- (**deps**) update purplebooth/generate-formula-action action to v0.1.16 - (ea6900d) - renovate[bot]
+- (**deps**) update actions/attest-build-provenance action to v2.3.0 - (242c13a) - renovate[bot]
+- (**deps**) update docker/setup-buildx-action action to v3.10.0 - (1714a84) - renovate[bot]
+- (**deps**) update docker/build-push-action action to v6.16.0 - (e545800) - renovate[bot]
+- (**deps**) update docker/setup-qemu-action action to v3.6.0 - (f3f84a8) - renovate[bot]
+- (**deps**) update docker/bake-action action to v6 - (93b0293) - renovate[bot]
+- (**deps**) update ncipollo/release-action action to v1.16.0 - (3e5b646) - renovate[bot]
+- (**deps**) update specdown/setup-specdown-action action to v0.2.32 - (aa7848f) - renovate[bot]
+- (**deps**) update docker/metadata-action action to v5.7.0 - (0e082ca) - renovate[bot]
+- (**deps**) update taiki-e/install-action digest to 83254c5 - (f9ea925) - renovate[bot]
+- (**deps**) update actions/attest-build-provenance digest to db473fd (#253) - (d7364e5) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to ab3728c (#252) - (e9f0e93) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 09dc018 (#251) - (241d707) - renovate[bot], *renovate[bot]*
+- (**deps**) update armakuni/github-actions action to v0.19.6 (#246) - (e7b259a) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to f1390fd (#250) - (d93c68c) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/cache action to v4.2.3 (#244) - (95e6837) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 2c41309 (#248) - (dcaab45) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance digest to c074443 (#247) - (867651f) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 3c8fc6e (#245) - (90fab3b) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to e032365 (#243) - (427a143) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to ad09049 (#242) - (8852b2f) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 5ae641a (#239) - (1837c93) - renovate[bot], *renovate[bot]*
+- (**deps**) update armakuni/github-actions action to v0.19.5 (#237) - (eb9f687) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance digest to 520d128 (#241) - (889ad7f) - renovate[bot], *renovate[bot]*
+- (**deps**) update docker/bake-action digest to 4a9a8d4 (#240) - (cd9675f) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to a7adeb1 (#236) - (1a9af07) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to c87777c (#231) - (02c30e7) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to a86da1a (#230) - (fae1e7a) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to acd2589 (#229) - (1abe433) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 8484225 (#228) - (745a178) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 03381f5 - (daf04d0) - renovate[bot]
+- (**deps**) update actions/attest-build-provenance digest to 7668571 (#224) - (7a64427) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to acf70b3 (#223) - (6fc8fd7) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance action to v2.0.1 (#222) - (108a511) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance digest to c4fbc64 (#221) - (71df6c0) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/cache action to v4.2.0 (#220) - (a3c3658) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to f635080 (#219) - (d5b7325) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 6aa8b42 (#217) - (6a8d3a7) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance action to v2 (#218) - (1aff531) - renovate[bot], *renovate[bot]*
+- (**deps**) update docker/bake-action digest to 3fc70e1 (#216) - (7e36f29) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to c4bf614 (#215) - (55a2466) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to ec9269c (#214) - (3dabf33) - renovate[bot], *renovate[bot]*
+- (**deps**) update docker/build-push-action action to v6.10.0 (#213) - (2eed9b2) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 6da51af (#212) - (97128c4) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 33e32f5 (#211) - (ee99fd1) - renovate[bot], *renovate[bot]*
+- (**deps**) update docker/metadata-action action to v5.6.1 (#210) - (81b3298) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 5d427d8 (#209) - (44de302) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 85c1f06 (#208) - (52af516) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 9c04113 (#207) - (6357219) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to c6dc131 (#206) - (5e826cc) - renovate[bot], *renovate[bot]*
+- (**deps**) update actions/attest-build-provenance action to v1.4.4 (#205) - (f4adc79) - renovate[bot], *renovate[bot]*
+- (**deps**) update taiki-e/install-action digest to 959f8ad - (e8db093) - renovate[bot]
+- (**deps**) update taiki-e/install-action digest to 678b06b - (fde8e2d) - renovate[bot]
+- update Cargo.toml edition and keywords - (13ae5de) - Billie Thompson
+- Update Rust edition in Cargo.toml from 2018 to 2021 - (e455e3f) - Billie Thompson (aider)
+
+- - -
+
 ## v0.16.6 - 2024-11-02
 #### Bug Fixes
 - Add key - (1fb914b) - Billie Thompson
